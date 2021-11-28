@@ -18,6 +18,7 @@
 		CB54A83B2752B24A0019B050 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB54A83A2752B24A0019B050 /* LoginView.swift */; };
 		CB54A8442752D2820019B050 /* AddTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB54A8432752D2820019B050 /* AddTraining.swift */; };
 		CB54A8462752FC7F0019B050 /* TopBarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB54A8452752FC7F0019B050 /* TopBarMenu.swift */; };
+		CB68FFD02753B5B60030DA57 /* MainViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB68FFCF2753B5B60030DA57 /* MainViewModel_Tests.swift */; };
 		CBED6A30274E9B8C00B2908B /* GerenciadorDeTreinosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED6A2F274E9B8C00B2908B /* GerenciadorDeTreinosApp.swift */; };
 		CBED6A32274E9B8C00B2908B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED6A31274E9B8C00B2908B /* MainView.swift */; };
 		CBED6A34274E9B8E00B2908B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBED6A33274E9B8E00B2908B /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		CB54A83A2752B24A0019B050 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CB54A8432752D2820019B050 /* AddTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTraining.swift; sourceTree = "<group>"; };
 		CB54A8452752FC7F0019B050 /* TopBarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarMenu.swift; sourceTree = "<group>"; };
+		CB68FFCF2753B5B60030DA57 /* MainViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel_Tests.swift; sourceTree = "<group>"; };
 		CBED6A2C274E9B8C00B2908B /* GerenciadorDeTreinos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GerenciadorDeTreinos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBED6A2F274E9B8C00B2908B /* GerenciadorDeTreinosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GerenciadorDeTreinosApp.swift; sourceTree = "<group>"; };
 		CBED6A31274E9B8C00B2908B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				CBED6A40274E9B8E00B2908B /* GerenciadorDeTreinosTests.swift */,
+				CB68FFCF2753B5B60030DA57 /* MainViewModel_Tests.swift */,
 			);
 			path = GerenciadorDeTreinosTests;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBED6A41274E9B8E00B2908B /* GerenciadorDeTreinosTests.swift in Sources */,
+				CB68FFD02753B5B60030DA57 /* MainViewModel_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

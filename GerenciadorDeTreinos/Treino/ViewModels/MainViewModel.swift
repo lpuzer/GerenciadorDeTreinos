@@ -15,9 +15,7 @@ final class MainViewModel: ObservableObject {
 
     
     init() {
-        self.mainModel = [MainModel(id: "0", name: "Yoda", description: "", suggestedTraining: false),
-                          MainModel(id: "1", name: "Ahsoka", description: "", suggestedTraining: true),
-                          MainModel(id: "2", name: "Anakin", description: "", suggestedTraining: false)]
+        self.mainModel = mainModel
   
         
     }
