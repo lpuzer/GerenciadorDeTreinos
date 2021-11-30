@@ -5,11 +5,12 @@
 //  Created by Luciano Puzer on 24/11/21.
 //
 
-import SwiftUI
+import Foundation
 
 protocol TrainingProtocol {
     var name: String { get set }
 }
+
 
 struct MainModel: TrainingProtocol, Identifiable {
     var id:String = UUID().uuidString
@@ -18,13 +19,26 @@ struct MainModel: TrainingProtocol, Identifiable {
     var suggestedTraining:Bool
 }
 
+
 struct TrainingListModel: TrainingProtocol, Identifiable {
     var id:String = UUID().uuidString
     var name: String
     var descricao:String
     var data:Date
-    
-    
+    var diaDaSemana:[String]
+    }
+
+struct DaysOfWeek: Identifiable {
+    var id:String = UUID().uuidString
+    var day:String
+    var isSelected: Bool = false
+}
+
+
+
+struct DayTraining: TrainingProtocol, Identifiable {
+    var id:String = UUID().uuidString
+    var name: String
 }
 
 

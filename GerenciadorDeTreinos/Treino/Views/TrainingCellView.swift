@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+
 struct TrainingCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
-    @EnvironmentObject var trainingListViewModel: TrainingListViewModel
     @State var selectedTraining:MainModel?
     @State var showActionSheet: Bool = false
+  
     
     var body: some View {
         HStack {
@@ -43,10 +44,7 @@ struct TrainingCellView: View {
                                                  
                                              }),
                                     .default(Text("Editar"),
-                                             action: {
-                                                     self.mainViewModel.trainingName = task.name
-                                                     self.mainViewModel.trainingDescription = task.description
-                                                    
+                                             action: {                                                   
                                              }
                                             ),
                                     .destructive(Text("Excluir"),
@@ -83,6 +81,5 @@ struct MainTrainingCell_Previews: PreviewProvider {
         TrainingCellView()
             .previewLayout(.sizeThatFits)
             .environmentObject(MainViewModel())
-            .environmentObject(TrainingListViewModel())
     }
 }

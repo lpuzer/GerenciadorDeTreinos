@@ -5,7 +5,7 @@
 //  Created by Luciano Puzer on 24/11/21.
 //
 
-import SwiftUI
+import Foundation
 import Combine
 
 final class MainViewModel: ObservableObject {
@@ -30,3 +30,4 @@ final class MainViewModel: ObservableObject {
  
     
 }
+

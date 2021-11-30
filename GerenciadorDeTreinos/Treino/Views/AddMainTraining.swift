@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct AddTraining: View {
+
+struct AddMainTraining: View {
     @EnvironmentObject var mainViewModel:MainViewModel
     @Environment(\.dismiss) var dismiss
     
@@ -95,9 +96,10 @@ struct AddTraining: View {
     }
 }
 
-struct AddTraining_Previews: PreviewProvider {
+struct AddMainTraining_Previews: PreviewProvider {
     static var previews: some View {
-        AddTraining()
+        AddMainTraining()
+            .environmentObject(MainViewModel())
             .previewLayout(.sizeThatFits)
     }
 }

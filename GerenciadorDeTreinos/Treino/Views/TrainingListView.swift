@@ -8,68 +8,89 @@
 import SwiftUI
 
 struct TrainingListView: View {
-    @EnvironmentObject var subTreinoViewModel: TrainingListViewModel
-    @EnvironmentObject var mainTreinoViewModel: MainViewModel
-      
+    @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
+    @State var showSheetForm:Bool = false
+    var weekDays:[String] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab", ]
+
+    @State var isDayTraining:Bool = false
+    
+    
     init() {
         UITableView.appearance().backgroundColor = .init(named: "ListTreinoViewBackground")
     }
     
     var body: some View {
-            ZStack {
+        ZStack {
+            VStack (alignment: .leading){
+                Button(action:  {
+                    showSheetForm.toggle()
+                } ) {
+                    TopBarMenu()
+                }.sheet(isPresented: $showSheetForm) {
+                    AddIndividualTraining()
+                }
+                Spacer()
                 VStack (alignment: .leading){
-                        List() {
-                            ForEach(subTreinoViewModel.subTrainingModel) { treino in
-                                NavigationLink(destination: ExerciseView()) {
-                                HStack (alignment: .top) {
-                                    Spacer()
-                                    VStack {
-                                        ZStack {
-                                            Text(treino.formatDay()).font(.title3)
-                                        }
-                                        Image(systemName: "arrow.down")
-                                            .resizable()
-                                            .frame(width: 10, height: 50)
-                                    }
-                                    Spacer()
-                                    VStack (alignment: .leading, spacing: 5){
-                                        HStack () {
-                                            Group{
-                                        Text(treino.name)
-                                        Text(treino.descricao)
-                                            }.font(.title3)
-                                        }
-                                        Text(treino.formatDate())
-                                            .font(.caption)
-                                    }.padding(.bottom, 20)
-                                    Spacer()
-                                }
-                            }
-                            }.listRowSeparator(.hidden)
-                        }.frame(width: 400, height: 600)
-                            .cornerRadius(30)
-                            .offset(x: 0, y: 40)
-                }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding()
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background {
-                    Color("mainBackground")
-                        .ignoresSafeArea()
-            }
-
-            
+                    Spacer()
+                    TrainingWeekCellView(day: "Dom")
+                    TrainingWeekCellView(day: "Seg")
+                    TrainingWeekCellView(day: "Ter")
+                    TrainingWeekCellView(day: "Qua")
+                    TrainingWeekCellView(day: "Qui")
+                    TrainingWeekCellView(day: "Sex")
+                    TrainingWeekCellView(day: "Sab")
+                }
+                Spacer()
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding()
         }
-    
-   
-    
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            Color("mainBackground")
+                .ignoresSafeArea()
+        }
     }
+    private func showTraining(weekTraining:WeekTraining) -> Bool {
+        return false
+    }
+}
 
 
-struct TreinoView_Previews: PreviewProvider {
+struct TrainingListView_Previews: PreviewProvider {
     static var previews: some View {
         TrainingListView()
             .environmentObject(MainViewModel())
-            .environmentObject(TrainingListViewModel())
+            .environmentObject(WeekTrainingViewModel())
+    }
+}
+
+struct TrainingWeekCellView: View {
+    @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
+    var day:String
+    
+    var body: some View {
+        HStack {
+            Text(day)
+                .modifier(weekDaysBorder())
+            ScrollView (.horizontal, showsIndicators: false){
+                HStack (alignment: .center){
+                    ForEach(weekTrainingViewModel.filteredArray) {treino in
+                        if treino.dayOfWeek.contains(day){
+                        Text(treino.trainingName)
+                            .font(.title3)
+                            .frame(width: 100, height: 50)
+                            .cornerRadius(50)
+                            .foregroundColor(Color.black)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(treino.isTrainingCompleted ? Color.green : Color.orange, lineWidth: 2)
+                            )
+                            .padding(.bottom, 30)
+                        }}
+                }
+            }
+            
+        }
     }
 }

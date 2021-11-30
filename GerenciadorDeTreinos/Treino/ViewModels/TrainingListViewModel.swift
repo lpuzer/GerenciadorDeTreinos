@@ -1,30 +1,42 @@
 //
-//  SubTreinoViewModel.swift
+//  TrainingListViewModel.swift
 //  GerenciadorDeTreinos
 //
-//  Created by Luciano Puzer on 25/11/21.
+//  Created by Luciano Puzer on 30/11/21.
 //
 
-import SwiftUI
+import Foundation
+import Combine
 
 final class TrainingListViewModel: ObservableObject {
-    @Published var subTrainingModel:[TrainingListModel] = []
+    @Published var trainingListModel:[TrainingListModel] = []
+    @Published var daysOfWeek:[DaysOfWeek] = []
     
     init() {
-        self.subTrainingModel = [
-            TrainingListModel(id: "0", name: "Yoda", descricao: "primeiro", data: Date()),
-            TrainingListModel(id: "1", name: "Ahsoka", descricao: "Segundo", data: Date()),
-            TrainingListModel(id: "2", name: "Anakin", descricao: "Terceiro", data: Date())
-        ]  
+        self.trainingListModel = [
+            TrainingListModel(id: "0", name: "Yoda", descricao: "primeiro", data: Date(), diaDaSemana: ["Seg", "Ter"]),
+            TrainingListModel(id: "1", name: "Ahsoka", descricao: "Segundo", data: Date(), diaDaSemana: ["Qua", "Qui" ]),
+            TrainingListModel(id: "2", name: "Anakin", descricao: "Terceiro", data: Date(), diaDaSemana: ["Sex", "Sab", "Dom"])
+        ]
+        
+        self.daysOfWeek = [DaysOfWeek(day: "Dom"),
+                           DaysOfWeek(day: "Seg"),
+                           DaysOfWeek(day: "Ter"),
+                           DaysOfWeek(day: "Qua"),
+                           DaysOfWeek(day: "Qui"),
+                           DaysOfWeek(day: "Sex"),
+                           DaysOfWeek(day: "Sab"),
+        ]
     }
     
-    func addTraining(_ task: TrainingListModel){
-        self.subTrainingModel.insert(task, at: 0)
+    func addWeekTraining(_ task: [String]){
+ 
         }
     
     func removeTraining(at offsets: IndexSet){
-        self.subTrainingModel.remove(atOffsets: offsets)
+        self.trainingListModel.remove(atOffsets: offsets)
     }
+    
     
     
 }

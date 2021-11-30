@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PageController: View {
-    @EnvironmentObject var treinoViewModel: MainViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
     @State private var selection = 0
     
     init() {
@@ -17,7 +17,6 @@ struct PageController: View {
     }
     
     var body: some View {
-        NavigationView {
             TabView (selection: $selection){
                 MainView()
                     .tabItem {
@@ -32,7 +31,6 @@ struct PageController: View {
                         Text("Conta")
                     }.tag(2)
             }.accentColor(.red)
-        }
     }
 }
 
@@ -40,8 +38,42 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         PageController()
             .environmentObject(MainViewModel())
-            .environmentObject(ExerciseImagesViewModel())
-            .environmentObject(ExerciseViewModel())
-            .environmentObject(TrainingListViewModel())
     }
 }
+
+
+
+
+struct weekDaysBorder: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .font(.title3)
+            .frame(width: 60, height: 50)
+            .cornerRadius(50)
+            .foregroundColor(Color.black)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.orange, lineWidth: 2)
+            )
+            .padding(.bottom, 30)
+            .padding(.trailing, 30)
+    }
+}
+
+
+struct weekTrainingBorder: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .font(.title3)
+            .frame(width: 100, height: 50)
+            .cornerRadius(50)
+            .foregroundColor(Color.black)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.orange, lineWidth: 2)
+            )
+            .padding(.bottom, 30)
+    }
+}
+   
+    
