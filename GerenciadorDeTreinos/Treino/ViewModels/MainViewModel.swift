@@ -12,6 +12,10 @@ final class MainViewModel: ObservableObject {
     @Published var mainModel:[MainModel] = []
     @Published var trainingName:String = ""
     @Published var trainingDescription:String = ""
+    @Published var showActionSheet: Bool = false
+    @Published var showSheetMainForm:Bool = false
+    @Published var showSheetForm:Bool = false
+    @Published var isDayTraining:Bool = false
 
     
     init() {

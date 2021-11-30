@@ -11,7 +11,7 @@ import SwiftUI
 struct TrainingCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @State var selectedTraining:MainModel?
-    @State var showActionSheet: Bool = false
+    //@State var showActionSheet: Bool = false
   
     
     var body: some View {
@@ -34,10 +34,10 @@ struct TrainingCellView: View {
                             .foregroundColor(Color.gray)
                             .offset(x: 270, y: -40)
                             .onTapGesture {
-                                self.showActionSheet.toggle()
+                                self.mainViewModel.showActionSheet.toggle()
                                 self.selectedTraining = task
                             }
-                            .actionSheet(isPresented: $showActionSheet) {
+                            .actionSheet(isPresented: $mainViewModel.showActionSheet) {
                                 ActionSheet(title: Text("Selecione a opção que deseja"), message: nil, buttons: [
                                     .default(Text("Abrir"),
                                              action: {
@@ -60,10 +60,7 @@ struct TrainingCellView: View {
                     }.frame(width: 300, height: 200)
                 }.frame(width: 300, height: 200)
                 
-            }.onDelete { (indexSet) in
-                self.mainViewModel.mainModel.remove(atOffsets: indexSet)
             }
-        
         }.background(Color("mainBackground"))
     }
     

@@ -12,10 +12,11 @@ struct AddIndividualTraining: View {
     
     
     @EnvironmentObject var mainViewModel:MainViewModel
-    @EnvironmentObject var trainingListViewModel: TrainingListViewModel
+    @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     @State var trainingDayName:String = ""
-    var selectedDay:[String] = []
     @Environment(\.dismiss) var dismiss
+    @State var x:[String] = []
+    @State var showAlert:Bool = false
     
     init(){
         UITableView.appearance().backgroundColor = .systemOrange
@@ -47,23 +48,24 @@ struct AddIndividualTraining: View {
                                 .foregroundColor(Color.black)
                             List{
                                 HStack (alignment: .top, spacing: 15) {
-                                    ForEach(0..<trainingListViewModel.daysOfWeek.count){ index in
+                                    ForEach(0..<weekTrainingViewModel.daysOfWeek.count){ index in
                                         VStack  {
                                             Button(action: {
-                                                trainingListViewModel.daysOfWeek[index].isSelected = trainingListViewModel.daysOfWeek[index].isSelected ? false : true
+                                                weekTrainingViewModel.daysOfWeek[index].isSelected = weekTrainingViewModel.daysOfWeek[index].isSelected ? false : true
+                                                   
+                                                if weekTrainingViewModel.daysOfWeek[index].isSelected {
+                                                    x.append(weekTrainingViewModel.filteredDayArray[index])
+                                                }
                                             }) {
                                                 VStack (alignment: .center, spacing: 2){
-                                                    if trainingListViewModel.daysOfWeek[index].isSelected {
+                                                    if weekTrainingViewModel.daysOfWeek[index].isSelected {
                                                         Image(systemName: "checkmark.square")
                                                             .foregroundColor(.green)
-                                                        
-                                                        
-                                                        
                                                     } else {
                                                         Image(systemName: "square")
                                                             .foregroundColor(.primary)
                                                     }
-                                                    Text(trainingListViewModel.daysOfWeek[index].day)
+                                                    Text(weekTrainingViewModel.daysOfWeek[index].day)
                                                         .font(.caption)
                                                         .foregroundColor(Color.black)  
                                                 }
@@ -82,10 +84,12 @@ struct AddIndividualTraining: View {
                         HStack{
                             Spacer()
                             Button(action: {
-                                let card = MainModel(id: "100", name: mainViewModel.trainingName, description: mainViewModel.trainingDescription, suggestedTraining: false)
-                                mainViewModel.addTraining(card)
-                                dismiss()
-                                dismiss()
+                                let cardsDay = WeekTraining(
+                                        dayOfWeek: x,
+                                        trainingName:
+                                        trainingDayName, isTrainingCompleted: false)
+                                        self.weekTrainingViewModel.addDayTraining(cardsDay)
+                                        dismiss()
                             }) {
                                 Text("Salvar")
                                     .fontWeight(.semibold)
@@ -134,6 +138,6 @@ struct AddIndividualTraining_Previews: PreviewProvider {
     static var previews: some View {
         AddIndividualTraining()
             .environmentObject(MainViewModel())
-            .environmentObject(TrainingListViewModel())
+            .environmentObject(WeekTrainingViewModel())
     }
 }

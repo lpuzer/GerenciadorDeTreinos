@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 final class ExerciseViewModel: ObservableObject {
     @Published var exercicioModel:[ExerciseModel] = []

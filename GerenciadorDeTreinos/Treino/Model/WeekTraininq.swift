@@ -14,3 +14,10 @@ struct WeekTraining: Identifiable {
     var isTrainingCompleted:Bool
     
 }
+
+
+struct DaysOfWeek: Identifiable {
+    var id:String = UUID().uuidString
+    var day:String
+    var isSelected: Bool = false
+}

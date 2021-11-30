@@ -9,10 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
-  
-    @State var selectedTraining:MainModel?
-    @State var showActionSheet: Bool = false
-    @State var showSheetMainForm:Bool = false
+    @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Action Sheet"), message: Text("Choose Option"), buttons: [
             .default(Text("Save")),
@@ -25,16 +22,17 @@ struct MainView: View {
             ZStack {
                 VStack {
                     Button(action:  {
-                        showSheetMainForm.toggle()
+                        mainViewModel.showSheetMainForm.toggle()
                     } ) {
                         TopBarMenu()
-                    }.sheet(isPresented: $showSheetMainForm) {
+                    }.sheet(isPresented: $mainViewModel.showSheetMainForm) {
                         AddMainTraining()
                     }
                     
                     ScrollView(.horizontal, showsIndicators: false){
                         NavigationLink(destination: TrainingListView()) {
-                            TrainingCellView(showActionSheet: showActionSheet)
+                            TrainingCellView()
+                            
                         }
                     }
                     
@@ -57,6 +55,7 @@ struct Home_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .environmentObject(MainViewModel())
+            .environmentObject(WeekTrainingViewModel())
          
         
     }

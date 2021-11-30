@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 final class ExerciseImagesViewModel: ObservableObject {
     @Published var imagensDosExerciciosModel: [ExerciseImagesModel] = []

@@ -18,7 +18,6 @@ struct GerenciadorDeTreinosApp: App {
                 .environmentObject(MainViewModel())
                 .environmentObject(ExerciseImagesViewModel())
                 .environmentObject(ExerciseViewModel())
-                .environmentObject(TrainingListViewModel())
                 .environmentObject(WeekTrainingViewModel())
        
         }

@@ -6,20 +6,38 @@
 //
 
 import Foundation
+import Combine
 
 
 class WeekTrainingViewModel: ObservableObject {
     
     @Published var weekTraining:[WeekTraining] = []
     @Published var filteredArray:[WeekTraining] = []
-    var diasDaSemana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]
+    @Published var daysOfWeek:[DaysOfWeek] = []
+    @Published var filteredDayArray:[String] = []
     
     init() {
-        getTraining()
+        self.daysOfWeek = [DaysOfWeek(day: "Dom"),
+                           DaysOfWeek(day: "Seg"),
+                           DaysOfWeek(day: "Ter"),
+                           DaysOfWeek(day: "Qua"),
+                           DaysOfWeek(day: "Qui"),
+                           DaysOfWeek(day: "Sex"),
+                           DaysOfWeek(day: "Sab"),
+        ]
+        showDaysOfWeek()
+        
+        self.weekTraining = weekTraining
         showTrainingList()
+        
     }
     
     
+    func showDaysOfWeek(){
+        filteredDayArray = daysOfWeek.compactMap({$0.day})
+    }
+    
+
     func showTrainingList(){
         filteredArray = weekTraining.filter({ days -> Bool in
             return (days.dayOfWeek.contains("Dom") || days.dayOfWeek.contains("Seg") ||
@@ -29,26 +47,17 @@ class WeekTrainingViewModel: ObservableObject {
         })
     }
     
+
     
     
-    func getTraining() {
-        let training1 = WeekTraining(dayOfWeek: ["Seg", "Ter"], trainingName: "Joelho", isTrainingCompleted: true)
-        let training2 = WeekTraining(dayOfWeek: ["Ter", "Qua"], trainingName: "braço", isTrainingCompleted: false)
-        let training3 = WeekTraining(dayOfWeek: ["Qua", "Sab"], trainingName: "Joelho", isTrainingCompleted: true)
-        let training4 = WeekTraining(dayOfWeek: ["Qui", "Qua", "Sex"], trainingName: "braço", isTrainingCompleted: false)
-        let training5 =  WeekTraining(dayOfWeek: ["Sex", "Dom"], trainingName: "perna", isTrainingCompleted: false)
-        let training6 =  WeekTraining(dayOfWeek: ["Sab"], trainingName: "tudo", isTrainingCompleted: false)
-        let training7 =  WeekTraining(dayOfWeek: ["Dom"], trainingName: "corrida", isTrainingCompleted: false)
-        
-        self.weekTraining.append(contentsOf: [
-            training1,
-            training2,
-            training3,
-            training4,
-            training5,
-            training6,
-            training7,
-        ])
+    func addDayTraining(_ task: WeekTraining){
+        self.filteredArray.insert(task, at: 0)
+        }
+    
+    func removeDayTraining(at offsets: IndexSet){
+        self.filteredArray.remove(atOffsets: offsets)
     }
+ 
+    
     
 }

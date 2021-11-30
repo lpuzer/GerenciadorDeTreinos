@@ -28,14 +28,6 @@ struct TrainingListModel: TrainingProtocol, Identifiable {
     var diaDaSemana:[String]
     }
 
-struct DaysOfWeek: Identifiable {
-    var id:String = UUID().uuidString
-    var day:String
-    var isSelected: Bool = false
-}
-
-
-
 struct DayTraining: TrainingProtocol, Identifiable {
     var id:String = UUID().uuidString
     var name: String

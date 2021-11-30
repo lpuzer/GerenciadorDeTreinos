@@ -10,12 +10,7 @@ import SwiftUI
 struct TrainingListView: View {
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
-    @State var showSheetForm:Bool = false
-    var weekDays:[String] = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab", ]
 
-    @State var isDayTraining:Bool = false
-    
-    
     init() {
         UITableView.appearance().backgroundColor = .init(named: "ListTreinoViewBackground")
     }
@@ -24,10 +19,10 @@ struct TrainingListView: View {
         ZStack {
             VStack (alignment: .leading){
                 Button(action:  {
-                    showSheetForm.toggle()
+                    mainViewModel.showSheetForm.toggle()
                 } ) {
                     TopBarMenu()
-                }.sheet(isPresented: $showSheetForm) {
+                }.sheet(isPresented: $mainViewModel.showSheetForm) {
                     AddIndividualTraining()
                 }
                 Spacer()
@@ -40,7 +35,8 @@ struct TrainingListView: View {
                     TrainingWeekCellView(day: "Qui")
                     TrainingWeekCellView(day: "Sex")
                     TrainingWeekCellView(day: "Sab")
-                }
+                }.navigationBarBackButtonHidden(true)
+                    .navigationBarHidden(true)
                 Spacer()
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
@@ -50,9 +46,6 @@ struct TrainingListView: View {
             Color("mainBackground")
                 .ignoresSafeArea()
         }
-    }
-    private func showTraining(weekTraining:WeekTraining) -> Bool {
-        return false
     }
 }
 
@@ -66,6 +59,7 @@ struct TrainingListView_Previews: PreviewProvider {
 }
 
 struct TrainingWeekCellView: View {
+    @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     var day:String
     
@@ -76,6 +70,7 @@ struct TrainingWeekCellView: View {
             ScrollView (.horizontal, showsIndicators: false){
                 HStack (alignment: .center){
                     ForEach(weekTrainingViewModel.filteredArray) {treino in
+                        NavigationLink(destination: ExerciseView()) {
                         if treino.dayOfWeek.contains(day){
                         Text(treino.trainingName)
                             .font(.title3)
@@ -87,7 +82,10 @@ struct TrainingWeekCellView: View {
                                     .stroke(treino.isTrainingCompleted ? Color.green : Color.orange, lineWidth: 2)
                             )
                             .padding(.bottom, 30)
-                        }}
+                        }
+                                
+                        }.navigationBarHidden(true)
+                    }
                 }
             }
             
