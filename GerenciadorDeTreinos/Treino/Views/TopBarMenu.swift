@@ -22,6 +22,5 @@ struct TopBarMenu: View {
 struct TopBarMenu_Previews: PreviewProvider {
     static var previews: some View {
         TopBarMenu()
-        
     }
 }

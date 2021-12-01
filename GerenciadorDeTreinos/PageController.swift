@@ -37,6 +37,7 @@ struct PageController: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         PageController()
+            .preferredColorScheme(.dark)
             .environmentObject(MainViewModel())
     }
 }

@@ -19,7 +19,7 @@ struct AddMainTraining: View {
     var body: some View {
         ZStack {
             Form {
-                VStack (alignment: .leading, spacing: 5){
+                VStack (alignment: .leading, spacing: 10){
                     Section{
                         Text("Nome do Treino")
                             .padding(.top)
@@ -34,6 +34,7 @@ struct AddMainTraining: View {
                             )
                             .padding(.bottom, 20)
                     }.font(.caption)
+                        .background(Color.white)
                     Section{
                         Text("Descrição do Treino")
                         TextEditor(text: $mainViewModel.trainingDescription)
@@ -51,7 +52,7 @@ struct AddMainTraining: View {
                         HStack{
                             Spacer()
                             Button(action: {
-                                let card = MainModel(id: "100", name: mainViewModel.trainingName, description: mainViewModel.trainingDescription, suggestedTraining: false)
+                                let card = MainModel(name: mainViewModel.trainingName, description: mainViewModel.trainingDescription, suggestedTraining: false)
                                 mainViewModel.addTraining(card)
                                 dismiss()
                             }) {
@@ -84,10 +85,12 @@ struct AddMainTraining: View {
                             Spacer()
                         }.padding(.bottom, 10)
                     }.font(.caption)
-                }.frame(height: 320)
+                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.white)
             }.frame(width: 300, height: 400)
                 .cornerRadius(30)
                 .padding()
+            
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
             .background {
                 Color("mainBackground")

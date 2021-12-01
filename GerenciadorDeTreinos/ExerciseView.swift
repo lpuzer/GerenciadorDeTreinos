@@ -18,7 +18,7 @@ struct ExerciseView: View {
     var body: some View {
         ZStack {
             VStack (alignment: .leading){
-                List() {
+                ScrollView() {
                     HStack {
                         Spacer()
                         VStack {
@@ -26,11 +26,11 @@ struct ExerciseView: View {
                                 VStack (alignment: .center) {
                                     Image(systemName: exercicios.image)
                                         .resizable()
-                                        .frame(width: 80, height: 80)
+                                        .frame(width: 60, height: 60)
                                     Image(systemName: "arrow.down")
                                         .resizable()
-                                        .frame(width: 20, height: 80)
-                                }.frame(width: 80, height: 180)
+                                        .frame(width: 20, height: 60)
+                                }.frame(width: 60, height: 180)
                             }
                         }
                         Spacer()
@@ -45,13 +45,13 @@ struct ExerciseView: View {
                                     }
                                     Text("\(Date())").font(.title3)
                                         .font(.caption)
-                                }.frame(width: 250, height: 180)
+                                }.frame(width: 200, height: 180)
                             }
                         
                         Spacer()
                     }
                     }
-                }.frame(width: 400, height: 600)
+                }.frame(width: 300, height: 600)
                     .cornerRadius(30)
                     .offset(x: 0, y: 40)
             }.frame(maxWidth: .infinity, maxHeight: .infinity)

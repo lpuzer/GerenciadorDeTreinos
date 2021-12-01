@@ -56,8 +56,6 @@ struct Home_Previews: PreviewProvider {
         MainView()
             .environmentObject(MainViewModel())
             .environmentObject(WeekTrainingViewModel())
-         
-        
     }
 }
 

@@ -6,30 +6,33 @@
 //
 
 import Foundation
+import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 protocol TrainingProtocol {
     var name: String { get set }
 }
 
 
-struct MainModel: TrainingProtocol, Identifiable {
-    var id:String = UUID().uuidString
+struct MainModel: TrainingProtocol, Identifiable, Codable {
+    @DocumentID var id: String?
     var name: String
     var description:String
     var suggestedTraining:Bool
 }
 
 
-struct TrainingListModel: TrainingProtocol, Identifiable {
-    var id:String = UUID().uuidString
+struct TrainingListModel: TrainingProtocol, Identifiable, Codable {
+    @DocumentID var id: String?
     var name: String
     var descricao:String
     var data:Date
     var diaDaSemana:[String]
     }
 
-struct DayTraining: TrainingProtocol, Identifiable {
-    var id:String = UUID().uuidString
+struct DayTraining: TrainingProtocol, Identifiable, Codable {
+    @DocumentID var id: String?
     var name: String
 }
 

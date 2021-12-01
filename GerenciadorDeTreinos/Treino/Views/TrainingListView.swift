@@ -10,7 +10,8 @@ import SwiftUI
 struct TrainingListView: View {
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
-
+    @State var selectedWeekTraining:WeekTraining?
+    
     init() {
         UITableView.appearance().backgroundColor = .init(named: "ListTreinoViewBackground")
     }
@@ -58,6 +59,9 @@ struct TrainingListView_Previews: PreviewProvider {
     }
 }
 
+
+
+
 struct TrainingWeekCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
@@ -71,19 +75,30 @@ struct TrainingWeekCellView: View {
                 HStack (alignment: .center){
                     ForEach(weekTrainingViewModel.filteredArray) {treino in
                         NavigationLink(destination: ExerciseView()) {
-                        if treino.dayOfWeek.contains(day){
-                        Text(treino.trainingName)
-                            .font(.title3)
-                            .frame(width: 100, height: 50)
-                            .cornerRadius(50)
-                            .foregroundColor(Color.black)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(treino.isTrainingCompleted ? Color.green : Color.orange, lineWidth: 2)
-                            )
-                            .padding(.bottom, 30)
-                        }
+                            if treino.dayOfWeek.contains(day){
+                                Text(treino.trainingName)
+                                    .font(.title3)
+                                    .frame(width: 100, height: 50)
+                                    .cornerRadius(50)
+                                    .foregroundColor(Color.black)
+                                    .padding(.bottom, 30)
+                                    .onTapGesture {
+                                        self.weekTrainingViewModel.showActionWeekSheet.toggle()
+                                    }
+                                    .actionSheet(isPresented: $weekTrainingViewModel.showActionWeekSheet) {
+                                        ActionSheet(title: Text("Selecione uma Opção"), message: nil
+                                                    , buttons: [
+                                                        .destructive(Text("Excluir"), action: {
+                                                            
+                                                                
+                                                            
+                                                        }),
+                                                        .cancel()
+                                                    ])
+                                    }
                                 
+                            }
+                            
                         }.navigationBarHidden(true)
                     }
                 }
@@ -91,4 +106,13 @@ struct TrainingWeekCellView: View {
             
         }
     }
+
+    func deleteWeek(weekTraining: WeekTraining) {
+        if let index = self.weekTrainingViewModel.filteredArray.firstIndex(where: { $0.id == weekTraining.id }) {
+            self.weekTrainingViewModel.filteredArray.remove(at: index)
+        }
+    }
+    
+    
+ 
 }

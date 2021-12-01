@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
 
 @main
 struct GerenciadorDeTreinosApp: App {
-
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
 
     var body: some Scene {
         WindowGroup {
@@ -23,3 +28,5 @@ struct GerenciadorDeTreinosApp: App {
         }
     }
 }
+
+

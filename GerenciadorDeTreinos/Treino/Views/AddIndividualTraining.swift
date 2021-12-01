@@ -15,7 +15,7 @@ struct AddIndividualTraining: View {
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     @State var trainingDayName:String = ""
     @Environment(\.dismiss) var dismiss
-    @State var x:[String] = []
+    @State var selectedDays:[String] = []
     @State var showAlert:Bool = false
     
     init(){
@@ -54,8 +54,9 @@ struct AddIndividualTraining: View {
                                                 weekTrainingViewModel.daysOfWeek[index].isSelected = weekTrainingViewModel.daysOfWeek[index].isSelected ? false : true
                                                    
                                                 if weekTrainingViewModel.daysOfWeek[index].isSelected {
-                                                    x.append(weekTrainingViewModel.filteredDayArray[index])
+                                                    selectedDays.append(weekTrainingViewModel.filteredDayArray[index]) 
                                                 }
+                                                
                                             }) {
                                                 VStack (alignment: .center, spacing: 2){
                                                     if weekTrainingViewModel.daysOfWeek[index].isSelected {
@@ -69,7 +70,6 @@ struct AddIndividualTraining: View {
                                                         .font(.caption)
                                                         .foregroundColor(Color.black)  
                                                 }
-                                               
                                             }.buttonStyle(BorderlessButtonStyle())
                                         }
                                     }
@@ -77,7 +77,6 @@ struct AddIndividualTraining: View {
                                
                             }.frame(width: 270, height: 50, alignment: .center)
                         }
-                            
                     }.font(.caption)
                     Spacer()
                     Section{
@@ -85,10 +84,12 @@ struct AddIndividualTraining: View {
                             Spacer()
                             Button(action: {
                                 let cardsDay = WeekTraining(
-                                        dayOfWeek: x,
-                                        trainingName:
-                                        trainingDayName, isTrainingCompleted: false)
+                                        dayOfWeek: selectedDays,
+                                        trainingName: trainingDayName,
+                                        isTrainingCompleted: false
+                                )
                                         self.weekTrainingViewModel.addDayTraining(cardsDay)
+                                
                                         dismiss()
                             }) {
                                 Text("Salvar")

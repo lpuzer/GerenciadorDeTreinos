@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 
 class WeekTrainingViewModel: ObservableObject {
@@ -15,6 +16,9 @@ class WeekTrainingViewModel: ObservableObject {
     @Published var filteredArray:[WeekTraining] = []
     @Published var daysOfWeek:[DaysOfWeek] = []
     @Published var filteredDayArray:[String] = []
+    @Published var showActionWeekSheet: Bool = false
+    @Published var showSheetWeekForm:Bool = false
+    @Published var isDayWeekTraining:Bool = false
     
     init() {
         self.daysOfWeek = [DaysOfWeek(day: "Dom"),
@@ -40,6 +44,7 @@ class WeekTrainingViewModel: ObservableObject {
 
     func showTrainingList(){
         filteredArray = weekTraining.filter({ days -> Bool in
+            
             return (days.dayOfWeek.contains("Dom") || days.dayOfWeek.contains("Seg") ||
                     days.dayOfWeek.contains("Ter") || days.dayOfWeek.contains("Qua") ||
                     days.dayOfWeek.contains("Qui") || days.dayOfWeek.contains("Sex") ||
@@ -58,6 +63,5 @@ class WeekTrainingViewModel: ObservableObject {
         self.filteredArray.remove(atOffsets: offsets)
     }
  
-    
     
 }

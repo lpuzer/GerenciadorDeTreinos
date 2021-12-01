@@ -11,8 +11,7 @@ import SwiftUI
 struct TrainingCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @State var selectedTraining:MainModel?
-    //@State var showActionSheet: Bool = false
-  
+ 
     
     var body: some View {
         HStack {
@@ -44,13 +43,20 @@ struct TrainingCellView: View {
                                                  
                                              }),
                                     .default(Text("Editar"),
-                                             action: {                                                   
+                                             action: {
+                                                 
                                              }
                                             ),
                                     .destructive(Text("Excluir"),
                                                  action: {
+                                                     
                                                      if let selectedTraining = self.selectedTraining {
+                                                         if selectedTraining.suggestedTraining == false {
                                                          self.delete(treinoModels: selectedTraining)
+                                                     }
+                                                     else{
+                                                         print("The training can not be excluded")
+                                                     }
                                                      }
                                                  }),
                                     .cancel()
@@ -60,17 +66,22 @@ struct TrainingCellView: View {
                     }.frame(width: 300, height: 200)
                 }.frame(width: 300, height: 200)
                 
+            }.onDelete { (indexSet) in
+                self.mainViewModel.mainModel.remove(atOffsets: indexSet)
             }
+        
         }.background(Color("mainBackground"))
     }
-    
+
     
     func delete(treinoModels: MainModel) {
-        if let index = self.mainViewModel.mainModel.firstIndex(where: { $0.id == treinoModels.id }) {
-            self.mainViewModel.mainModel.remove(at: index)
+        mainViewModel.removeTraining(treinoModels)
         }
-    }
+
+
+ 
 }
+
 
 
 struct MainTrainingCell_Previews: PreviewProvider {
@@ -80,3 +91,5 @@ struct MainTrainingCell_Previews: PreviewProvider {
             .environmentObject(MainViewModel())
     }
 }
+
+
