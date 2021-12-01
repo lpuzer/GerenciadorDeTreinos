@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -20,6 +19,8 @@ struct MainModel: TrainingProtocol, Identifiable, Codable {
     var name: String
     var description:String
     var suggestedTraining:Bool
+    @ServerTimestamp var createdTime: Timestamp?
+    var userId:String?
 }
 
 

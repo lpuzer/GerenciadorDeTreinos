@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 
 @main
@@ -14,6 +15,7 @@ struct GerenciadorDeTreinosApp: App {
     
     init() {
         FirebaseApp.configure()
+        Auth.auth().signInAnonymously()
     }
     
 

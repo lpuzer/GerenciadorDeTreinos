@@ -22,7 +22,10 @@ class TrainingRepository: ObservableObject {
     }
     
     func getTraining() {
+        if let userId = Auth.auth().currentUser?.uid {
         db.collection(path)
+            .order(by: "createdTime")
+            .whereField("userId", isEqualTo: userId)
             .addSnapshotListener{ (snapshot, error) in
                 if let snapshot = snapshot {
                     self.mainModel = snapshot.documents.compactMap { document in
@@ -37,12 +40,17 @@ class TrainingRepository: ObservableObject {
                     }
                 }
             }
+        } else {
+            print("There is no user")
+        }
     }
     
     
     func addTraining(_ mainModel: MainModel) {
         do {
-            _ = try db.collection(path).document().setData(from: mainModel)
+            var addedTraining = mainModel
+            addedTraining.userId = Auth.auth().currentUser?.uid
+            _ = try db.collection(path).document().setData(from: addedTraining)
         } catch {
             fatalError("Adding the training failed")
         }
