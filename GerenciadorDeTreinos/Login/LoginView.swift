@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @State var coordinator: SigInWithAppleCoordinator?
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Obrigado por usar nosso aplicativo")
+                .font(.title3)
+            SignInWithAppleButton()
+                .frame(width: 200, height: 54)
+                .onTapGesture {
+                    self.coordinator = SigInWithAppleCoordinator()
+                    if let coordinator = coordinator {
+                        coordinator.startSignInWithAppleFlow {
+                            print("You successfully signed in")
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    }
+                }
+        }
     }
 }
 

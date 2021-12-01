@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
+    @State var showSignInForm = false
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Action Sheet"), message: Text("Choose Option"), buttons: [
             .default(Text("Save")),

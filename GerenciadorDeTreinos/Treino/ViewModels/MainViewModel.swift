@@ -20,6 +20,7 @@ final class MainViewModel: ObservableObject {
     @Published var isDayTraining:Bool = false
     
     private var cancellables: Set<AnyCancellable> = []
+    
 
     
     init() {
