@@ -10,7 +10,6 @@ import SwiftUI
 struct TrainingListView: View {
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
-    @State var selectedWeekTraining:WeekTraining?
     
     init() {
         UITableView.appearance().backgroundColor = .init(named: "ListTreinoViewBackground")
@@ -19,16 +18,7 @@ struct TrainingListView: View {
     var body: some View {
         ZStack {
             VStack (alignment: .leading){
-                Button(action:  {
-                    mainViewModel.showSheetForm.toggle()
-                } ) {
-                    TopBarMenu()
-                }.sheet(isPresented: $mainViewModel.showSheetForm) {
-                    AddIndividualTraining()
-                }
-                Spacer()
-                VStack (alignment: .leading){
-                    Spacer()
+                 VStack (alignment: .leading){
                     TrainingWeekCellView(day: "Dom")
                     TrainingWeekCellView(day: "Seg")
                     TrainingWeekCellView(day: "Ter")
@@ -36,9 +26,17 @@ struct TrainingListView: View {
                     TrainingWeekCellView(day: "Qui")
                     TrainingWeekCellView(day: "Sex")
                     TrainingWeekCellView(day: "Sab")
-                }.navigationBarBackButtonHidden(true)
-                    .navigationBarHidden(true)
+                }
                 Spacer()
+                Button(action:  {
+                    mainViewModel.showSheetForm.toggle()
+                } ) {
+                    TopBarMenu(buttonBarWidth: 50.0, buttonBarHeight: 50.0, buttonBarColor: .orange)
+                }.sheet(isPresented: $mainViewModel.showSheetForm) {
+                    AddIndividualTraining()
+                }
+                Spacer()
+                
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
         }
@@ -89,17 +87,14 @@ struct TrainingWeekCellView: View {
                                         ActionSheet(title: Text("Selecione uma Opção"), message: nil
                                                     , buttons: [
                                                         .destructive(Text("Excluir"), action: {
-                                                            
-                                                                
-                                                            
+   
                                                         }),
                                                         .cancel()
                                                     ])
                                     }
-                                
                             }
                             
-                        }.navigationBarHidden(true)
+                        }
                     }
                 }
             }
@@ -112,7 +107,4 @@ struct TrainingWeekCellView: View {
             self.weekTrainingViewModel.filteredArray.remove(at: index)
         }
     }
-    
-    
- 
 }

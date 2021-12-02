@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AddMainTraining: View {
     @EnvironmentObject var mainViewModel:MainViewModel
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     
     init(){
         UITableView.appearance().backgroundColor = .systemOrange
@@ -54,7 +54,7 @@ struct AddMainTraining: View {
                             Button(action: {
                                 let card = MainModel(name: mainViewModel.trainingName, description: mainViewModel.trainingDescription, suggestedTraining: false)
                                 mainViewModel.addTraining(card)
-                                dismiss()
+                                presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Salvar")
                                     .fontWeight(.semibold)
@@ -69,7 +69,7 @@ struct AddMainTraining: View {
                             }
                             Spacer()
                             Button(action: {
-                                dismiss()
+                                presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Cancelar")
                                     .fontWeight(.semibold)

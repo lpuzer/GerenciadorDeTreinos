@@ -11,8 +11,7 @@ import SwiftUI
 struct TrainingCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @State var selectedTraining:MainModel?
- 
-    
+     
     var body: some View {
         HStack {
             ForEach (mainViewModel.mainModel) { task in
@@ -52,11 +51,11 @@ struct TrainingCellView: View {
                                                      
                                                      if let selectedTraining = self.selectedTraining {
                                                          if selectedTraining.suggestedTraining == false {
-                                                         self.delete(treinoModels: selectedTraining)
-                                                     }
-                                                     else{
-                                                         print("The training can not be excluded")
-                                                     }
+                                                             self.delete(treinoModels: selectedTraining)
+                                                         }
+                                                         else{
+                                                             print("The training can not be excluded")
+                                                         }
                                                      }
                                                  }),
                                     .cancel()
@@ -65,21 +64,13 @@ struct TrainingCellView: View {
                             }
                     }.frame(width: 300, height: 200)
                 }.frame(width: 300, height: 200)
-                
-            }.onDelete { (indexSet) in
-                self.mainViewModel.mainModel.remove(atOffsets: indexSet)
             }
-        
         }.background(Color("mainBackground"))
     }
-
     
     func delete(treinoModels: MainModel) {
         mainViewModel.removeTraining(treinoModels)
-        }
-
-
- 
+    }
 }
 
 

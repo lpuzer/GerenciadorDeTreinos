@@ -14,7 +14,7 @@ struct AddIndividualTraining: View {
     @EnvironmentObject var mainViewModel:MainViewModel
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     @State var trainingDayName:String = ""
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @State var selectedDays:[String] = []
     @State var showAlert:Bool = false
     
@@ -90,7 +90,7 @@ struct AddIndividualTraining: View {
                                 )
                                         self.weekTrainingViewModel.addDayTraining(cardsDay)
                                 
-                                        dismiss()
+                                presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Salvar")
                                     .fontWeight(.semibold)
@@ -105,7 +105,7 @@ struct AddIndividualTraining: View {
                             }
                             Spacer()
                             Button(action: {
-                                dismiss()
+                                presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Cancelar")
                                     .fontWeight(.semibold)

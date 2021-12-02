@@ -6,31 +6,29 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import GoogleSignIn
 
 struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var coordinator: SigInWithAppleCoordinator?
+
+
     var body: some View {
         VStack {
             Text("Obrigado por usar nosso aplicativo")
                 .font(.title3)
-            SignInWithAppleButton()
-                .frame(width: 200, height: 54)
-                .onTapGesture {
-                    self.coordinator = SigInWithAppleCoordinator()
-                    if let coordinator = coordinator {
-                        coordinator.startSignInWithAppleFlow {
-                            print("You successfully signed in")
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-        }
+            AppleLogin()
+            GoogleLogin()
+        }.padding()
     }
 }
+    
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
 }
+
+

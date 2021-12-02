@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
-    @State var showSignInForm = false
+    
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Action Sheet"), message: Text("Choose Option"), buttons: [
             .default(Text("Save")),
@@ -18,6 +18,7 @@ struct MainView: View {
             .destructive(Text("Cancel"))
         ])
     }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -25,7 +26,7 @@ struct MainView: View {
                     Button(action:  {
                         mainViewModel.showSheetMainForm.toggle()
                     } ) {
-                        TopBarMenu()
+                        TopBarMenu(buttonBarWidth: 30.0, buttonBarHeight: 30.0, buttonBarColor: .blue)
                     }.sheet(isPresented: $mainViewModel.showSheetMainForm) {
                         AddMainTraining()
                     }
