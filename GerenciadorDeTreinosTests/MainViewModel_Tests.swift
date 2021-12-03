@@ -21,7 +21,7 @@ class MainViewModel_Tests: XCTestCase {
     func test_MainViewModel_addTraining() {
         let vm = MainViewModel()
         
-        vm.addTraining(MainModel(id: "", name: "Yoda", description: "Treino muscular para Jides", suggestedTraining: false))
+        vm.addTraining(MainModel(id: "", name: "Yoda", description: "Treino muscular para Jides", suggestedTraining: false, editable: false))
         
         XCTAssertTrue(!vm.mainModel.isEmpty)
         XCTAssertFalse(vm.mainModel.isEmpty)

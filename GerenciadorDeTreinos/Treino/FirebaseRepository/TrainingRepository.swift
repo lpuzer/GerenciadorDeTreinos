@@ -23,23 +23,23 @@ class TrainingRepository: ObservableObject {
     
     func getTraining() {
         if let userId = Auth.auth().currentUser?.uid {
-        db.collection(path)
-            .order(by: "createdTime")
-            .whereField("userId", isEqualTo: userId)
-            .addSnapshotListener{ (snapshot, error) in
-                if let snapshot = snapshot {
-                    self.mainModel = snapshot.documents.compactMap { document in
-                        do {
-                            let x = try document.data(as: MainModel.self)
-                            return x
+            db.collection(path)
+                .order(by: "createdTime")
+                .whereField("userId", isEqualTo: userId)
+                .addSnapshotListener{ (snapshot, error) in
+                    if let snapshot = snapshot {
+                        self.mainModel = snapshot.documents.compactMap { document in
+                            do {
+                                let x = try document.data(as: MainModel.self)
+                                return x
+                            }
+                            catch {
+                                print(error)
+                            }
+                            return nil
                         }
-                        catch {
-                            print(error)
-                        }
-                        return nil
                     }
                 }
-            }
         } else {
             print("There is no user")
         }
@@ -50,13 +50,13 @@ class TrainingRepository: ObservableObject {
         do {
             var addedTraining = mainModel
             addedTraining.userId = Auth.auth().currentUser?.uid
-            _ = try db.collection(path).document().setData(from: addedTraining)
+            _ = try db.collection(path).addDocument(from: addedTraining)
         } catch {
             fatalError("Adding the training failed")
         }
     }
     
-
+    
     func removeTraining(_ mainModel: MainModel) {
         if let mainModelID = mainModel.id {
             db.collection(path).document(mainModelID).delete() { err in
@@ -71,12 +71,15 @@ class TrainingRepository: ObservableObject {
     
     
     func updateTraining(_ mainModel: MainModel) {
-        do {
-            try db.collection(path).document().setData(from: mainModel)
-        } catch {
-            fatalError("Document failed to update")
+        if let documentID = mainModel.id {
+            do {
+                try db.collection(path).document(documentID).setData(from: mainModel)
+            } catch {
+                fatalError("Document failed to update")
+            }
         }
     }
-
+    
 }
+
 

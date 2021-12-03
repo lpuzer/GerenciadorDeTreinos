@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import FirebaseAuth
 import GoogleSignIn
 
@@ -33,7 +35,11 @@ class AppDelegate: NSObject, UIApplicationDelegate{
                      [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         FirebaseApp.configure()
-        Auth.auth().signInAnonymously()
+        
+        if Auth.auth().currentUser == nil {
+            Auth.auth().signInAnonymously()
+            }
+        
         return true
     }
     

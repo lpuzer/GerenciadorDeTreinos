@@ -8,23 +8,24 @@
 import Foundation
 import Combine
 import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 final class MainViewModel: ObservableObject {
     @Published var mainModel:[MainModel] = []
     @Published var trainingRepository = TrainingRepository()
-    @Published var trainingName:String = ""
-    @Published var trainingDescription:String = ""
-    @Published var showActionSheet: Bool = false
     @Published var showSheetMainForm:Bool = false
     @Published var showSheetForm:Bool = false
     @Published var isDayTraining:Bool = false
+    @Published var initialMainTraining:MainModel
     
     private var cancellables: Set<AnyCancellable> = []
     
 
     
     init() {
-        self.mainModel = mainModel
+        self.initialMainTraining = MainModel(id: "", name: "", description: "", suggestedTraining: false, userId: "", editable: false)
+        
         
         trainingRepository.$mainModel
             .assign(to: \.mainModel, on: self)
@@ -35,12 +36,10 @@ final class MainViewModel: ObservableObject {
     
     func addTraining(_ task: MainModel){
         trainingRepository.addTraining(task)
-      //  self.mainModel.insert(task, at: 0)
         }
     
     func removeTraining(_ task: MainModel){
         trainingRepository.removeTraining(task)
-      //  self.mainModel.remove(atOffsets: offsets)
     }
  
     

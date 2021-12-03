@@ -31,7 +31,7 @@ struct MainView: View {
                         AddMainTraining()
                     }
                     
-                    ScrollView(.horizontal, showsIndicators: false){
+                    ScrollView(.horizontal, showsIndicators: true){
                         NavigationLink(destination: TrainingListView()) {
                             TrainingCellView()
                             

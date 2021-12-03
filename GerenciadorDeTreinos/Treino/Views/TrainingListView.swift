@@ -17,7 +17,7 @@ struct TrainingListView: View {
     
     var body: some View {
         ZStack {
-            VStack (alignment: .leading){
+            VStack {
                  VStack (alignment: .leading){
                     TrainingWeekCellView(day: "Dom")
                     TrainingWeekCellView(day: "Seg")
@@ -27,7 +27,6 @@ struct TrainingListView: View {
                     TrainingWeekCellView(day: "Sex")
                     TrainingWeekCellView(day: "Sab")
                 }
-                Spacer()
                 Button(action:  {
                     mainViewModel.showSheetForm.toggle()
                 } ) {
@@ -35,12 +34,10 @@ struct TrainingListView: View {
                 }.sheet(isPresented: $mainViewModel.showSheetForm) {
                     AddIndividualTraining()
                 }
-                Spacer()
-                
-            }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding()
+            }.frame(alignment: .topLeading)
+            Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background {
             Color("mainBackground")
                 .ignoresSafeArea()
@@ -99,7 +96,7 @@ struct TrainingWeekCellView: View {
                 }
             }
             
-        }
+        }.frame(width: 300, height: 60, alignment: .top)
     }
 
     func deleteWeek(weekTraining: WeekTraining) {

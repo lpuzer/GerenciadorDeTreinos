@@ -11,7 +11,10 @@ import SwiftUI
 struct TrainingCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @State var selectedTraining:MainModel?
-     
+    @State private var showEditTraining = false
+    @State private var showDeleteSheet = false
+    @State private var showEditSheet = false
+    
     var body: some View {
         HStack {
             ForEach (mainViewModel.mainModel) { task in
@@ -28,40 +31,53 @@ struct TrainingCellView: View {
                             .fontWeight(.bold)
                             .offset(x: 0, y: 20)
                             .padding()
-                        Image(systemName: "list.bullet.circle")
-                            .foregroundColor(Color.gray)
-                            .offset(x: 270, y: -40)
-                            .onTapGesture {
-                                self.mainViewModel.showActionSheet.toggle()
-                                self.selectedTraining = task
-                            }
-                            .actionSheet(isPresented: $mainViewModel.showActionSheet) {
-                                ActionSheet(title: Text("Selecione a opção que deseja"), message: nil, buttons: [
-                                    .default(Text("Abrir"),
-                                             action: {
-                                                 
-                                             }),
-                                    .default(Text("Editar"),
-                                             action: {
-                                                 
-                                             }
-                                            ),
-                                    .destructive(Text("Excluir"),
-                                                 action: {
-                                                     
-                                                     if let selectedTraining = self.selectedTraining {
-                                                         if selectedTraining.suggestedTraining == false {
-                                                             self.delete(treinoModels: selectedTraining)
+                        VStack {
+                            Spacer()
+                            Image(systemName: "multiply.circle")
+                                .foregroundColor(Color.gray)
+                                .offset(x: 270, y: -40)
+                                .onTapGesture {
+                                    self.selectedTraining = task
+                                    self.showDeleteSheet.toggle()
+                                }
+                                .actionSheet(isPresented: $showDeleteSheet) {
+                                    ActionSheet(title: Text("Excluir Treino Definitivamente"), message: nil, buttons: [
+                                        .destructive(Text("Excluir"),
+                                                     action: {
+                                                         if let selectedTraining = self.selectedTraining {
+                                                             if selectedTraining.suggestedTraining == false {
+                                                                 self.delete(treinoModels: selectedTraining)
+                                                             }
+                                                             else{
+                                                                 print("The training can not be excluded")
+                                                             }
                                                          }
-                                                         else{
-                                                             print("The training can not be excluded")
-                                                         }
-                                                     }
-                                                 }),
-                                    .cancel()
-                                ])
-                                
-                            }
+                                                     }),
+                                        .cancel()
+                                    ])
+                                    
+                                }
+                            Spacer()
+                            Image(systemName: "gearshape")
+                                .foregroundColor(Color.gray)
+                                .offset(x: 270, y: -40)
+                                .onTapGesture {
+                                    self.selectedTraining = task
+                                    self.showEditSheet.toggle()
+                                }
+                                .actionSheet(isPresented: $showEditSheet, content: actionSheet)
+                                .sheet(isPresented: $showEditTraining, onDismiss: {
+                                    mainViewModel.initialMainTraining.editable = true
+                                    mainViewModel.initialMainTraining.name = task.name
+                                    mainViewModel.initialMainTraining.description = task.description
+                                    mainViewModel.initialMainTraining.id = task.id
+                                    mainViewModel.initialMainTraining.userId = task.userId
+                                }) {
+                                    AddMainTraining()
+                                }
+                            
+                        }
+                        
                     }.frame(width: 300, height: 200)
                 }.frame(width: 300, height: 200)
             }
@@ -71,6 +87,19 @@ struct TrainingCellView: View {
     func delete(treinoModels: MainModel) {
         mainViewModel.removeTraining(treinoModels)
     }
+    
+    private func actionSheet() -> ActionSheet {
+        let button1 = ActionSheet.Button.default(Text("Edit")) {
+            self.showEditSheet = false
+            self.showEditTraining = true
+        }
+        
+        let actionSheet = ActionSheet(title: Text("Escolha uma opção"),
+                                      message: nil,
+                                      buttons: [button1, .cancel()])
+        return actionSheet
+    }
+    
 }
 
 
