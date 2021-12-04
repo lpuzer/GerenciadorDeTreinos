@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
+    @State var showSheetMainForm:Bool = false
     
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Action Sheet"), message: Text("Choose Option"), buttons: [
@@ -24,16 +25,21 @@ struct MainView: View {
             ZStack {
                 VStack {
                     Button(action:  {
-                        mainViewModel.showSheetMainForm.toggle()
+                        showSheetMainForm.toggle()
                     } ) {
                         TopBarMenu(buttonBarWidth: 30.0, buttonBarHeight: 30.0, buttonBarColor: .blue)
-                    }.sheet(isPresented: $mainViewModel.showSheetMainForm) {
+                    }.sheet(isPresented: $showSheetMainForm) {
                         AddMainTraining()
                     }
                     
                     ScrollView(.horizontal, showsIndicators: true){
                         NavigationLink(destination: TrainingListView()) {
+                            
+                            
+                            
                                 TrainingCellView()
+                            
+                            
                             
                         }
                     }

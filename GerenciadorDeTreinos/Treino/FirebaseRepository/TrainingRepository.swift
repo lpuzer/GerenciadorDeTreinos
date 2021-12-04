@@ -24,7 +24,7 @@ class TrainingRepository: ObservableObject {
     func getTraining() {
         if let userId = Auth.auth().currentUser?.uid {
             db.collection(path)
-                .order(by: "createdTime")
+                .order(by: "createdTime", descending: true)
                 .whereField("userId", isEqualTo: userId)
                 .addSnapshotListener{ (snapshot, error) in
                     if let snapshot = snapshot {

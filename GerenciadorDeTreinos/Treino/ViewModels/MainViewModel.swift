@@ -18,13 +18,13 @@ final class MainViewModel: ObservableObject {
     @Published var showSheetForm:Bool = false
     @Published var isDayTraining:Bool = false
     @Published var initialMainTraining:MainModel
-    
+    @Published var editableDoc:Bool = false
     private var cancellables: Set<AnyCancellable> = []
     
 
     
     init() {
-        self.initialMainTraining = MainModel(id: "", name: "", description: "", suggestedTraining: false, userId: "", editable: false)
+        self.initialMainTraining = MainModel(id: "", name: "", description: "", suggestedTraining: false, userId: "")
         
         
         trainingRepository.$mainModel

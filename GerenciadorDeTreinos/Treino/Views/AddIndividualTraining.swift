@@ -128,8 +128,20 @@ struct AddIndividualTraining: View {
                                                                 fridayDay: self.weekTrainingViewModel.initialWeekTraining.fridayDay,
                                                                 saturdayDay: self.weekTrainingViewModel.initialWeekTraining.saturdayDay)
                                     self.weekTrainingViewModel.addDayTraining(cardsDay)
+                                   
                                 }
                                 self.weekTrainingViewModel.initialWeekTraining.trainingName = ""
+                                    for i in 0..<7 {
+                                        self.weekTrainingViewModel.daysOfWeek[i].isSelected = false
+                                    }
+                           
+                                self.weekTrainingViewModel.initialWeekTraining.sundayDay = ""
+                                self.weekTrainingViewModel.initialWeekTraining.mondayDay = ""
+                                self.weekTrainingViewModel.initialWeekTraining.twesdayDay = ""
+                                self.weekTrainingViewModel.initialWeekTraining.wednesdayDay = ""
+                                self.weekTrainingViewModel.initialWeekTraining.thursdayDay = ""
+                                self.weekTrainingViewModel.initialWeekTraining.fridayDay = ""
+                                self.weekTrainingViewModel.initialWeekTraining.saturdayDay = ""
                                 presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Salvar")

@@ -21,7 +21,6 @@ struct MainModel: TrainingProtocol, Identifiable, Codable {
     var suggestedTraining:Bool
     @ServerTimestamp var createdTime: Timestamp?
     var userId:String?
-    var editable:Bool 
 }
 
 

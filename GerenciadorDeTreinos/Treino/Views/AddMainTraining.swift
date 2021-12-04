@@ -11,6 +11,7 @@ import SwiftUI
 struct AddMainTraining: View {
     @EnvironmentObject var mainViewModel:MainViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State var EditableDoc:Bool = false
     
     init(){
         UITableView.appearance().backgroundColor = .systemOrange
@@ -57,14 +58,13 @@ struct AddMainTraining: View {
                             Spacer()
                             Button(action: {
                                 if mainViewModel.initialMainTraining.name != "" {
-                                        if (mainViewModel.initialMainTraining.editable == true) {
-                                            let card = MainModel(id: mainViewModel.initialMainTraining.id,
-                                                                 name: mainViewModel.initialMainTraining.name,
-                                                                 description: mainViewModel.initialMainTraining.description,
-                                                                 suggestedTraining: false,
-                                                                 userId: mainViewModel.initialMainTraining.userId,
-                                                                 editable: mainViewModel.initialMainTraining.editable
-                                                                 
+                                    if (mainViewModel.editableDoc == true) {
+                                            let card = MainModel(
+                                                id:mainViewModel.initialMainTraining.id,
+                                                name: mainViewModel.initialMainTraining.name,
+                                                description: mainViewModel.initialMainTraining.description,
+                                                suggestedTraining: false,
+                                                userId: mainViewModel.initialMainTraining.userId         
                                             )
                                             mainViewModel.updateTraining(card)
                                         }
@@ -72,15 +72,14 @@ struct AddMainTraining: View {
                                             let card = MainModel(name: mainViewModel.initialMainTraining.name,
                                                                  description: mainViewModel.initialMainTraining.description,
                                                                  suggestedTraining: false,
-                                                                 userId: mainViewModel.initialMainTraining.userId,
-                                                                 editable: mainViewModel.initialMainTraining.editable
+                                                                 userId: mainViewModel.initialMainTraining.userId
                                             )
                                             mainViewModel.addTraining(card)
                                         }
-                                    self.mainViewModel.initialMainTraining.name = ""
-                                    self.mainViewModel.initialMainTraining.description = ""
-                                    self.mainViewModel.initialMainTraining.editable = false
                             }
+                                self.mainViewModel.initialMainTraining.name = ""
+                                self.mainViewModel.initialMainTraining.description = ""
+                                self.mainViewModel.editableDoc = false
                                 presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Salvar")

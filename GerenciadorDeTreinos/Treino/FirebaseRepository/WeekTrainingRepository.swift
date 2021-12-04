@@ -21,9 +21,7 @@ class WeekTrainingRepository: ObservableObject {
     }
     
     func getWeekTraining() {
-        if let userId = Auth.auth().currentUser?.uid {
             db.collection(path)
-                .whereField("userId", isEqualTo: userId)
                 .addSnapshotListener{ (snapshot, error) in
                     if let snapshot = snapshot {
                         self.weekTraining = snapshot.documents.compactMap { document in
@@ -33,14 +31,11 @@ class WeekTrainingRepository: ObservableObject {
                             }
                             catch {
                                 print(error)
-                            }
-                            return nil
                         }
+                            return nil
                     }
                 }
-        } else {
-            print("There is no user")
-        }
+            }
     }
     
     

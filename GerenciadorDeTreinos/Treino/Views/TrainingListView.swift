@@ -28,7 +28,6 @@ struct TrainingListView: View {
                     TrainingWeekCellView(day: "Sab")
                 }
                 Button(action:  {
-                    
                     self.weekTrainingViewModel.initialWeekTraining.trainingName = ""
                     self.weekTrainingViewModel.initialWeekTraining.sunday = false
                     self.weekTrainingViewModel.initialWeekTraining.monday = false
@@ -80,14 +79,14 @@ struct TrainingWeekCellView: View {
                 HStack (alignment: .center){
                     ForEach(weekTrainingViewModel.weekTraining) {treino in
                         NavigationLink(destination: ExerciseView()) {
-                            if (    treino.sundayDay == day
+                            if ((    treino.sundayDay == day
                                 ||  treino.mondayDay == day
                                 ||  treino.twesdayDay == day
                                 ||  treino.wednesdayDay == day
                                 ||  treino.thursdayDay == day
                                 ||  treino.fridayDay == day
                                 ||  treino.saturdayDay == day
-                                ) && treino.trainingId == mainViewModel.initialMainTraining.id  {
+                                ) && treino.trainingId == mainViewModel.initialMainTraining.id)  {
 
                                 Text(treino.trainingName)
                                     .modifier(weekTrainingBorder())
@@ -101,9 +100,7 @@ struct TrainingWeekCellView: View {
                                                         .destructive(Text("Excluir"), action: {
    
                                                             
-                                                            if (!treino.sunday && !treino.monday && !treino.twesday && !treino.wednesday && !treino.thursday && !treino.friday && !treino.saturday){
                                                             
-                                                            }
                                                             
                                                         }),
                                                         .cancel()

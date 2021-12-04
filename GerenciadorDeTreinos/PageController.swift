@@ -12,7 +12,7 @@ struct PageController: View {
     @State private var selection = 0
     
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.systemGray5
+        UITabBar.appearance().backgroundColor = .init(named: "TabBarBackground")
         UITabBar.appearance().unselectedItemTintColor = UIColor.black
     }
     
@@ -50,6 +50,7 @@ struct weekDaysBorder: ViewModifier {
         return content
             .font(.title3)
             .frame(width: 60, height: 50)
+            .background(Color("CellOrange"))
             .cornerRadius(50)
             .foregroundColor(Color.black)
             .overlay(
@@ -67,6 +68,7 @@ struct weekTrainingBorder: ViewModifier {
         return content
             .font(.title3)
             .frame(width: 100, height: 50)
+            .background(Color("CellBlue"))
             .cornerRadius(50)
             .foregroundColor(Color.black)
             .overlay(

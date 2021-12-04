@@ -29,12 +29,8 @@ struct TrainingCellView: View {
                             .frame(width: 300, height: 200)
                             .onAppear {
                                 self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
-                                self.mainViewModel.initialMainTraining.editable = true
-                                self.mainViewModel.initialMainTraining.name = task.name
-                                self.mainViewModel.initialMainTraining.description = task.description
                                 self.mainViewModel.initialMainTraining.id = task.id
-                                self.mainViewModel.initialMainTraining.userId = task.userId
-                            }
+                                            }
                         Text(task.name)
                             .font(.title2)
                             .foregroundColor(Color.white)
@@ -73,7 +69,8 @@ struct TrainingCellView: View {
                                 .offset(x: 270, y: -40)
                                 .onTapGesture {
                                     self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
-                                    self.mainViewModel.initialMainTraining.editable = true
+                                    self.mainViewModel.initialMainTraining.id = task.id
+                                    self.mainViewModel.editableDoc = true
                                     self.mainViewModel.initialMainTraining.name = task.name
                                     self.mainViewModel.initialMainTraining.description = task.description
                                     self.mainViewModel.initialMainTraining.userId = task.userId
