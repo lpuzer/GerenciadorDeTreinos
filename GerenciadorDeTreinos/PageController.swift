@@ -71,7 +71,7 @@ struct weekTrainingBorder: ViewModifier {
             .foregroundColor(Color.black)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.orange, lineWidth: 2)
+                    .stroke(Color.blue, lineWidth: 3)
             )
             .padding(.bottom, 30)
     }

@@ -27,6 +27,7 @@
 		CB68FFD02753B5B60030DA57 /* MainViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB68FFCF2753B5B60030DA57 /* MainViewModel_Tests.swift */; };
 		CB87781027559439009BDEA6 /* WeekTraininq.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87780F27559439009BDEA6 /* WeekTraininq.swift */; };
 		CBD4399B27542D79006FA1B3 /* AddIndividualTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD4399A27542D79006FA1B3 /* AddIndividualTraining.swift */; };
+		CBEA2E05275AC0B200EE0BC1 /* WeekTrainingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEA2E04275AC0B200EE0BC1 /* WeekTrainingRepository.swift */; };
 		CBEC3E6B27578D4500202FA5 /* TrainingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEC3E6A27578D4500202FA5 /* TrainingRepository.swift */; };
 		CBEC3E7D2757A2AD00202FA5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBEC3E7C2757A2AD00202FA5 /* GoogleService-Info.plist */; };
 		CBEC3E802757A34300202FA5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CBEC3E7F2757A34300202FA5 /* FirebaseAnalytics */; };
@@ -84,6 +85,7 @@
 		CB68FFCF2753B5B60030DA57 /* MainViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel_Tests.swift; sourceTree = "<group>"; };
 		CB87780F27559439009BDEA6 /* WeekTraininq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTraininq.swift; sourceTree = "<group>"; };
 		CBD4399A27542D79006FA1B3 /* AddIndividualTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIndividualTraining.swift; sourceTree = "<group>"; };
+		CBEA2E04275AC0B200EE0BC1 /* WeekTrainingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTrainingRepository.swift; sourceTree = "<group>"; };
 		CBEC3E6A27578D4500202FA5 /* TrainingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingRepository.swift; sourceTree = "<group>"; };
 		CBEC3E7C2757A2AD00202FA5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CBED6A2C274E9B8C00B2908B /* GerenciadorDeTreinos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GerenciadorDeTreinos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				CBEC3E6A27578D4500202FA5 /* TrainingRepository.swift */,
+				CBEA2E04275AC0B200EE0BC1 /* WeekTrainingRepository.swift */,
 			);
 			path = FirebaseRepository;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				CBD4399B27542D79006FA1B3 /* AddIndividualTraining.swift in Sources */,
 				CB4963552751376500A39EAC /* ExerciseImagesViewModel.swift in Sources */,
 				CB87781027559439009BDEA6 /* WeekTraininq.swift in Sources */,
+				CBEA2E05275AC0B200EE0BC1 /* WeekTrainingRepository.swift in Sources */,
 				CB49634727500D7D00A39EAC /* ExerciseModel.swift in Sources */,
 				CBED6A32274E9B8C00B2908B /* MainView.swift in Sources */,
 				CB54A8442752D2820019B050 /* AddMainTraining.swift in Sources */,

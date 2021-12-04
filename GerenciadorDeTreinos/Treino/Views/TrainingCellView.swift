@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine
+import FirebaseAuth
 
 
 struct TrainingCellView: View {
@@ -25,6 +27,14 @@ struct TrainingCellView: View {
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(20)
                             .frame(width: 300, height: 200)
+                            .onAppear {
+                                self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
+                                self.mainViewModel.initialMainTraining.editable = true
+                                self.mainViewModel.initialMainTraining.name = task.name
+                                self.mainViewModel.initialMainTraining.description = task.description
+                                self.mainViewModel.initialMainTraining.id = task.id
+                                self.mainViewModel.initialMainTraining.userId = task.userId
+                            }
                         Text(task.name)
                             .font(.title2)
                             .foregroundColor(Color.white)
@@ -62,16 +72,16 @@ struct TrainingCellView: View {
                                 .foregroundColor(Color.gray)
                                 .offset(x: 270, y: -40)
                                 .onTapGesture {
-                                    self.selectedTraining = task
+                                    self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
+                                    self.mainViewModel.initialMainTraining.editable = true
+                                    self.mainViewModel.initialMainTraining.name = task.name
+                                    self.mainViewModel.initialMainTraining.description = task.description
+                                    self.mainViewModel.initialMainTraining.userId = task.userId
                                     self.showEditSheet.toggle()
                                 }
                                 .actionSheet(isPresented: $showEditSheet, content: actionSheet)
                                 .sheet(isPresented: $showEditTraining, onDismiss: {
-                                    mainViewModel.initialMainTraining.editable = true
-                                    mainViewModel.initialMainTraining.name = task.name
-                                    mainViewModel.initialMainTraining.description = task.description
-                                    mainViewModel.initialMainTraining.id = task.id
-                                    mainViewModel.initialMainTraining.userId = task.userId
+                                    
                                 }) {
                                     AddMainTraining()
                                 }

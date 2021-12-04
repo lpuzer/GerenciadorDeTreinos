@@ -28,6 +28,16 @@ struct TrainingListView: View {
                     TrainingWeekCellView(day: "Sab")
                 }
                 Button(action:  {
+                    
+                    self.weekTrainingViewModel.initialWeekTraining.trainingName = ""
+                    self.weekTrainingViewModel.initialWeekTraining.sunday = false
+                    self.weekTrainingViewModel.initialWeekTraining.monday = false
+                    self.weekTrainingViewModel.initialWeekTraining.twesday = false
+                    self.weekTrainingViewModel.initialWeekTraining.wednesday = false
+                    self.weekTrainingViewModel.initialWeekTraining.thursday = false
+                    self.weekTrainingViewModel.initialWeekTraining.friday = false
+                    self.weekTrainingViewModel.initialWeekTraining.saturday = false
+
                     mainViewModel.showSheetForm.toggle()
                 } ) {
                     TopBarMenu(buttonBarWidth: 50.0, buttonBarHeight: 50.0, buttonBarColor: .orange)
@@ -68,15 +78,20 @@ struct TrainingWeekCellView: View {
                 .modifier(weekDaysBorder())
             ScrollView (.horizontal, showsIndicators: false){
                 HStack (alignment: .center){
-                    ForEach(weekTrainingViewModel.filteredArray) {treino in
+                    ForEach(weekTrainingViewModel.weekTraining) {treino in
                         NavigationLink(destination: ExerciseView()) {
-                            if treino.dayOfWeek.contains(day){
+                            if (    treino.sundayDay == day
+                                ||  treino.mondayDay == day
+                                ||  treino.twesdayDay == day
+                                ||  treino.wednesdayDay == day
+                                ||  treino.thursdayDay == day
+                                ||  treino.fridayDay == day
+                                ||  treino.saturdayDay == day
+                                ) && treino.trainingId == mainViewModel.initialMainTraining.id  {
+
                                 Text(treino.trainingName)
-                                    .font(.title3)
-                                    .frame(width: 100, height: 50)
-                                    .cornerRadius(50)
-                                    .foregroundColor(Color.black)
-                                    .padding(.bottom, 30)
+                                    .modifier(weekTrainingBorder())
+                                    .padding(5)
                                     .onTapGesture {
                                         self.weekTrainingViewModel.showActionWeekSheet.toggle()
                                     }
@@ -85,10 +100,16 @@ struct TrainingWeekCellView: View {
                                                     , buttons: [
                                                         .destructive(Text("Excluir"), action: {
    
+                                                            
+                                                            if (!treino.sunday && !treino.monday && !treino.twesday && !treino.wednesday && !treino.thursday && !treino.friday && !treino.saturday){
+                                                            
+                                                            }
+                                                            
                                                         }),
                                                         .cancel()
                                                     ])
                                     }
+                            
                             }
                             
                         }

@@ -8,10 +8,11 @@
 import Foundation
 import Combine
 import UIKit
+import FirebaseAuth
 
 
 class WeekTrainingViewModel: ObservableObject {
-    
+    @Published var weekTrainingRepository = WeekTrainingRepository()
     @Published var weekTraining:[WeekTraining] = []
     @Published var filteredArray:[WeekTraining] = []
     @Published var daysOfWeek:[DaysOfWeek] = []
@@ -19,6 +20,8 @@ class WeekTrainingViewModel: ObservableObject {
     @Published var showActionWeekSheet: Bool = false
     @Published var showSheetWeekForm:Bool = false
     @Published var isDayWeekTraining:Bool = false
+    @Published var initialWeekTraining:WeekTraining
+    private var cancellables: Set<AnyCancellable> = []
     
     init() {
         self.daysOfWeek = [DaysOfWeek(day: "Dom"),
@@ -29,10 +32,36 @@ class WeekTrainingViewModel: ObservableObject {
                            DaysOfWeek(day: "Sex"),
                            DaysOfWeek(day: "Sab"),
         ]
-        showDaysOfWeek()
+
         
-        self.weekTraining = weekTraining
-        showTrainingList()
+        self.initialWeekTraining = WeekTraining(id: "",
+                                                userId: "",
+                                                trainingName: "",
+                                                trainingId: "",
+                                                sunday: false,
+                                                monday: false,
+                                                twesday: false,
+                                                wednesday: false,
+                                                thursday: false,
+                                                friday: false,
+                                                saturday: false,
+                                                sundayDay: "",
+                                                mondayDay: "",
+                                                twesdayDay: "",
+                                                wednesdayDay: "",
+                                                thursdayDay: "",
+                                                fridayDay: "",
+                                                saturdayDay: ""
+        )
+        
+        
+        
+        weekTrainingRepository.$weekTraining
+            .assign(to: \.weekTraining, on: self)
+            .store(in: &cancellables)
+        
+        
+        
         
     }
     
@@ -40,23 +69,10 @@ class WeekTrainingViewModel: ObservableObject {
     func showDaysOfWeek(){
         filteredDayArray = daysOfWeek.compactMap({$0.day})
     }
-    
 
-    func showTrainingList(){
-        filteredArray = weekTraining.filter({ days -> Bool in
-            
-            return (days.dayOfWeek.contains("Dom") || days.dayOfWeek.contains("Seg") ||
-                    days.dayOfWeek.contains("Ter") || days.dayOfWeek.contains("Qua") ||
-                    days.dayOfWeek.contains("Qui") || days.dayOfWeek.contains("Sex") ||
-                    days.dayOfWeek.contains("Sab"))
-        })
-    }
-    
-
-    
     
     func addDayTraining(_ task: WeekTraining){
-        self.filteredArray.insert(task, at: 0)
+        weekTrainingRepository.addWeekTraining(task)
         }
     
     func removeDayTraining(at offsets: IndexSet){

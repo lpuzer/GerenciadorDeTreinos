@@ -16,6 +16,7 @@ struct ExerciseModel: Exercise, Identifiable {
     var nome:String
     var id:String = UUID().uuidString
     var observacoes:String
+    var trainingId:String? 
 }
 
 struct ExerciseImagesModel: Exercise, Identifiable {

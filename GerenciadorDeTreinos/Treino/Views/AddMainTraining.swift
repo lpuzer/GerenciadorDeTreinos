@@ -57,8 +57,7 @@ struct AddMainTraining: View {
                             Spacer()
                             Button(action: {
                                 if mainViewModel.initialMainTraining.name != "" {
-                                    
-                                        if mainViewModel.initialMainTraining.editable {
+                                        if (mainViewModel.initialMainTraining.editable == true) {
                                             let card = MainModel(id: mainViewModel.initialMainTraining.id,
                                                                  name: mainViewModel.initialMainTraining.name,
                                                                  description: mainViewModel.initialMainTraining.description,
@@ -73,6 +72,7 @@ struct AddMainTraining: View {
                                             let card = MainModel(name: mainViewModel.initialMainTraining.name,
                                                                  description: mainViewModel.initialMainTraining.description,
                                                                  suggestedTraining: false,
+                                                                 userId: mainViewModel.initialMainTraining.userId,
                                                                  editable: mainViewModel.initialMainTraining.editable
                                             )
                                             mainViewModel.addTraining(card)
