@@ -6,6 +6,11 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
+import Combine
 
 struct TrainingListView: View {
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
@@ -94,13 +99,8 @@ struct TrainingWeekCellView: View {
                                                             if let selecTraining = self.selecTraining {
                                                                 if selecTraining.isSelectedDay == true {
                                                                     self.deleteTreino(weekTraining: selecTraining)
-                                                                }else{
-                                                                    print("deu pau no isSelect")
                                                                 }
-                                                            }else{
-                                                                print("deu pau no selectTraining")
-                                                            }
-                                                            
+                                                            }  
 
                                                         }),
                                                         .cancel()

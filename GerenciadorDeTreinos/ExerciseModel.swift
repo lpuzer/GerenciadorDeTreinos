@@ -6,7 +6,11 @@
 //
 
 import SwiftUI
-
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
+import Combine
 
 protocol Exercise {
     var nome: String { get set }

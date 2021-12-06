@@ -5,9 +5,12 @@
 //  Created by Luciano Puzer on 29/11/21.
 //
 
-import Foundation
+import SwiftUI
+import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseAuth
+import Combine
 
 struct WeekTraining: Identifiable, Codable {
     @DocumentID var id: String?

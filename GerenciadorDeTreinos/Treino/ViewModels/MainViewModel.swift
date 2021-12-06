@@ -5,11 +5,12 @@
 //  Created by Luciano Puzer on 24/11/21.
 //
 
-import Foundation
-import Combine
+import SwiftUI
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseAuth
+import Combine
 
 final class MainViewModel: ObservableObject {
     @Published var mainModel:[MainModel] = []

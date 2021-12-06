@@ -7,7 +7,10 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import FirebaseAuth
+import Combine
 import GoogleSignIn
 
 struct GoogleLogin: View {

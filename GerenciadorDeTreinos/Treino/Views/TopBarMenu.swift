@@ -6,6 +6,11 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
+import Combine
 
 struct TopBarMenu: View {
         var buttonBarWidth:CGFloat

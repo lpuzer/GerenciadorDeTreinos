@@ -5,10 +5,12 @@
 //  Created by Luciano Puzer on 29/11/21.
 //
 
-import Foundation
-import Combine
-import UIKit
+import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import FirebaseAuth
+import Combine
 
 
 class WeekTrainingViewModel: ObservableObject {

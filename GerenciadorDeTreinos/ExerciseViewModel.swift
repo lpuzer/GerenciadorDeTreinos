@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
 import Combine
 
 final class ExerciseViewModel: ObservableObject {

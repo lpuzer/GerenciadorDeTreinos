@@ -5,10 +5,11 @@
 //  Created by Luciano Puzer on 03/12/21.
 //
 
-import Foundation
+import SwiftUI
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseAuth
 import Combine
 
 class WeekTrainingRepository: ObservableObject {

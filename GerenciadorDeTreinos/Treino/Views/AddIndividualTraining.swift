@@ -7,8 +7,11 @@
 
 
 import SwiftUI
-import Combine
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import FirebaseAuth
+import Combine
 
 
 struct AddIndividualTraining: View {

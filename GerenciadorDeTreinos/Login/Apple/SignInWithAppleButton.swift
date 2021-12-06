@@ -5,8 +5,12 @@
 //  Created by Luciano Puzer on 01/12/21.
 //
 
-import Foundation
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
+import Combine
 import AuthenticationServices
 
 struct SignInWithAppleButton: UIViewRepresentable {

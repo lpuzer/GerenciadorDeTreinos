@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
-import Combine
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import FirebaseAuth
+import Combine
 
 struct TrainingCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
@@ -44,7 +47,8 @@ struct TrainingCellView: View {
                             Spacer()
                             Image(systemName: "multiply.circle")
                                 .foregroundColor(Color.gray)
-                                .offset(x: 290, y: -45)
+                                .padding(20)
+                                .offset(x: 260, y: -20)
                                 .onTapGesture {
                                     self.selectedTraining = task
                                     self.showDeleteSheet.toggle()
@@ -66,9 +70,11 @@ struct TrainingCellView: View {
                                     ])
                                 }
                             Spacer()
+
                             Image(systemName: "gearshape")
                                 .foregroundColor(Color.gray)
-                                .offset(x: 10, y: -140)
+                                .padding(30)
+                                .offset(x: -20, y: -120)
                                 .onTapGesture {
                                     self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
                                     self.mainViewModel.initialMainTraining.id = task.id

@@ -4,8 +4,11 @@
 //
 //  Created by Luciano Puzer on 26/11/21.
 //
-
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
 import Combine
 
 final class ExerciseImagesViewModel: ObservableObject {
