@@ -14,20 +14,8 @@ struct WeekTraining: Identifiable, Codable {
     var userId:String?
     var trainingName:String
     var trainingId:String?
-    var sunday:Bool
-    var monday:Bool
-    var twesday:Bool
-    var wednesday:Bool
-    var thursday:Bool
-    var friday:Bool
-    var saturday:Bool
-    var sundayDay:String?
-    var mondayDay:String?
-    var twesdayDay:String?
-    var wednesdayDay:String?
-    var thursdayDay:String?
-    var fridayDay:String?
-    var saturdayDay:String?
+    var selectedDay:String
+    var isSelectedDay:Bool
 
     
 }

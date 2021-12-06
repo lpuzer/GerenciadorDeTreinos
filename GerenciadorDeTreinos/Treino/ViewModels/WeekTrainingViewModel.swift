@@ -16,12 +16,14 @@ class WeekTrainingViewModel: ObservableObject {
     @Published var weekTraining:[WeekTraining] = []
     @Published var filteredArray:[WeekTraining] = []
     @Published var daysOfWeek:[DaysOfWeek] = []
+    @Published var selectedDay:[String] = []
     @Published var filteredDayArray:[String] = []
     @Published var showActionWeekSheet: Bool = false
     @Published var showSheetWeekForm:Bool = false
     @Published var isDayWeekTraining:Bool = false
     @Published var initialWeekTraining:WeekTraining
     private var cancellables: Set<AnyCancellable> = []
+    
     
     init() {
         self.daysOfWeek = [DaysOfWeek(day: "Dom"),
@@ -32,26 +34,16 @@ class WeekTrainingViewModel: ObservableObject {
                            DaysOfWeek(day: "Sex"),
                            DaysOfWeek(day: "Sab"),
         ]
-
+        
+        
+        self.selectedDay = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]
         
         self.initialWeekTraining = WeekTraining(id: "",
                                                 userId: "",
                                                 trainingName: "",
                                                 trainingId: "",
-                                                sunday: false,
-                                                monday: false,
-                                                twesday: false,
-                                                wednesday: false,
-                                                thursday: false,
-                                                friday: false,
-                                                saturday: false,
-                                                sundayDay: "",
-                                                mondayDay: "",
-                                                twesdayDay: "",
-                                                wednesdayDay: "",
-                                                thursdayDay: "",
-                                                fridayDay: "",
-                                                saturdayDay: ""
+                                                selectedDay: "",
+                                                isSelectedDay: false
         )
         
         
@@ -75,9 +67,15 @@ class WeekTrainingViewModel: ObservableObject {
         weekTrainingRepository.addWeekTraining(task)
         }
     
-    func removeDayTraining(at offsets: IndexSet){
-        self.filteredArray.remove(atOffsets: offsets)
+    func removeTraining(_ task: WeekTraining){
+        weekTrainingRepository.removeTraining(task)
     }
  
+    
+    func updateTraining(_ task: WeekTraining) {
+        weekTrainingRepository.updateTraining(task)
+    }
+    
+    
     
 }

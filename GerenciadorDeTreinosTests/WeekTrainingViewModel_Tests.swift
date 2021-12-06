@@ -22,7 +22,7 @@ class WeekTrainingViewModel_Tests: XCTestCase {
     func test_WeekTraining_addTraining() {
         let weekVM = WeekTrainingViewModel()
         
-        weekVM.addDayTraining(WeekTraining(id: "", dayOfWeek: [""], trainingName: "Joelho", isTrainingCompleted: false))
+        weekVM.addDayTraining(WeekTraining(userId: "", trainingName: "", trainingId: "", sunday: false, monday: false, twesday: false, wednesday: false, thursday: false, friday: false, saturday: false, sundayDay: "", mondayDay: "", twesdayDay: "", wednesdayDay: "", thursdayDay: "", fridayDay: "", saturdayDay: ""))
         
         XCTAssertTrue(!weekVM.filteredArray.isEmpty)
         XCTAssertFalse(weekVM.filteredArray.isEmpty)

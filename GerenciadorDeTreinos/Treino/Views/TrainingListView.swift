@@ -19,25 +19,19 @@ struct TrainingListView: View {
         ZStack {
             VStack {
                  VStack (alignment: .leading){
-                    TrainingWeekCellView(day: "Dom")
-                    TrainingWeekCellView(day: "Seg")
-                    TrainingWeekCellView(day: "Ter")
-                    TrainingWeekCellView(day: "Qua")
-                    TrainingWeekCellView(day: "Qui")
-                    TrainingWeekCellView(day: "Sex")
-                    TrainingWeekCellView(day: "Sab")
+                    TrainingWeekCellView(days: "Dom")
+                    TrainingWeekCellView(days: "Seg")
+                    TrainingWeekCellView(days: "Ter")
+                    TrainingWeekCellView(days: "Qua")
+                    TrainingWeekCellView(days: "Qui")
+                    TrainingWeekCellView(days: "Sex")
+                    TrainingWeekCellView(days: "Sab")
                 }
                 Button(action:  {
                     self.weekTrainingViewModel.initialWeekTraining.trainingName = ""
-                    self.weekTrainingViewModel.initialWeekTraining.sunday = false
-                    self.weekTrainingViewModel.initialWeekTraining.monday = false
-                    self.weekTrainingViewModel.initialWeekTraining.twesday = false
-                    self.weekTrainingViewModel.initialWeekTraining.wednesday = false
-                    self.weekTrainingViewModel.initialWeekTraining.thursday = false
-                    self.weekTrainingViewModel.initialWeekTraining.friday = false
-                    self.weekTrainingViewModel.initialWeekTraining.saturday = false
-
-                    mainViewModel.showSheetForm.toggle()
+                    self.weekTrainingViewModel.initialWeekTraining.selectedDay = ""
+                    self.weekTrainingViewModel.initialWeekTraining.isSelectedDay = false
+                    self.mainViewModel.showSheetForm.toggle()
                 } ) {
                     TopBarMenu(buttonBarWidth: 50.0, buttonBarHeight: 50.0, buttonBarColor: .orange)
                 }.sheet(isPresented: $mainViewModel.showSheetForm) {
@@ -69,39 +63,45 @@ struct TrainingListView_Previews: PreviewProvider {
 struct TrainingWeekCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
-    var day:String
+    @State var selecTraining:WeekTraining?
+    @State var showDeleteTrainingSheet:Bool = false
+    var days:String
     
     var body: some View {
         HStack {
-            Text(day)
+            Text(days)
                 .modifier(weekDaysBorder())
             ScrollView (.horizontal, showsIndicators: false){
                 HStack (alignment: .center){
                     ForEach(weekTrainingViewModel.weekTraining) {treino in
                         NavigationLink(destination: ExerciseView()) {
-                            if ((    treino.sundayDay == day
-                                ||  treino.mondayDay == day
-                                ||  treino.twesdayDay == day
-                                ||  treino.wednesdayDay == day
-                                ||  treino.thursdayDay == day
-                                ||  treino.fridayDay == day
-                                ||  treino.saturdayDay == day
+                            if ((   treino.selectedDay == days
                                 ) && treino.trainingId == mainViewModel.initialMainTraining.id)  {
 
                                 Text(treino.trainingName)
                                     .modifier(weekTrainingBorder())
                                     .padding(5)
                                     .onTapGesture {
-                                        self.weekTrainingViewModel.showActionWeekSheet.toggle()
+                                        self.selecTraining = treino
+                                        self.showDeleteTrainingSheet.toggle()
+                                        
                                     }
-                                    .actionSheet(isPresented: $weekTrainingViewModel.showActionWeekSheet) {
+                                    .actionSheet(isPresented: $showDeleteTrainingSheet) {
                                         ActionSheet(title: Text("Selecione uma Opção"), message: nil
                                                     , buttons: [
-                                                        .destructive(Text("Excluir"), action: {
-   
+                                                        .destructive(Text("Excluir"),
+                                                            action: {
+                                                            if let selecTraining = self.selecTraining {
+                                                                if selecTraining.isSelectedDay == true {
+                                                                    self.deleteTreino(weekTraining: selecTraining)
+                                                                }else{
+                                                                    print("deu pau no isSelect")
+                                                                }
+                                                            }else{
+                                                                print("deu pau no selectTraining")
+                                                            }
                                                             
-                                                            
-                                                            
+
                                                         }),
                                                         .cancel()
                                                     ])
@@ -114,12 +114,9 @@ struct TrainingWeekCellView: View {
                 }
             }
             
-        }.frame(width: 300, height: 60, alignment: .top)
+        }.frame(width: 350, height: 60, alignment: .top)
     }
-
-    func deleteWeek(weekTraining: WeekTraining) {
-        if let index = self.weekTrainingViewModel.filteredArray.firstIndex(where: { $0.id == weekTraining.id }) {
-            self.weekTrainingViewModel.filteredArray.remove(at: index)
-        }
+    func deleteTreino(weekTraining: WeekTraining) {
+        weekTrainingViewModel.removeTraining(weekTraining)
     }
 }

@@ -9,13 +9,13 @@ import SwiftUI
 import Combine
 import FirebaseAuth
 
-
 struct TrainingCellView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @State var selectedTraining:MainModel?
     @State private var showEditTraining = false
     @State private var showDeleteSheet = false
     @State private var showEditSheet = false
+    @State var changePage:Bool = false
     
     var body: some View {
         HStack {
@@ -26,11 +26,14 @@ struct TrainingCellView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(20)
-                            .frame(width: 300, height: 200)
-                            .onAppear {
+                            .frame(width: 320, height: 200)
+                            .onTapGesture {
                                 self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
                                 self.mainViewModel.initialMainTraining.id = task.id
-                                            }
+                                changePage.toggle()
+                            }
+                        NavigationLink ("", destination: TrainingListView(),
+                                        isActive: $changePage)
                         Text(task.name)
                             .font(.title2)
                             .foregroundColor(Color.white)
@@ -41,7 +44,7 @@ struct TrainingCellView: View {
                             Spacer()
                             Image(systemName: "multiply.circle")
                                 .foregroundColor(Color.gray)
-                                .offset(x: 270, y: -40)
+                                .offset(x: 290, y: -45)
                                 .onTapGesture {
                                     self.selectedTraining = task
                                     self.showDeleteSheet.toggle()
@@ -61,12 +64,11 @@ struct TrainingCellView: View {
                                                      }),
                                         .cancel()
                                     ])
-                                    
                                 }
                             Spacer()
                             Image(systemName: "gearshape")
                                 .foregroundColor(Color.gray)
-                                .offset(x: 270, y: -40)
+                                .offset(x: 10, y: -140)
                                 .onTapGesture {
                                     self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
                                     self.mainViewModel.initialMainTraining.id = task.id
@@ -82,11 +84,9 @@ struct TrainingCellView: View {
                                 }) {
                                     AddMainTraining()
                                 }
-                            
                         }
-                        
                     }.frame(width: 300, height: 200)
-                }.frame(width: 300, height: 200)
+                }.frame(width: 350, height: 200)
             }
         }.background(Color("mainBackground"))
     }
@@ -106,10 +106,7 @@ struct TrainingCellView: View {
                                       buttons: [button1, .cancel()])
         return actionSheet
     }
-    
 }
-
-
 
 struct MainTrainingCell_Previews: PreviewProvider {
     static var previews: some View {

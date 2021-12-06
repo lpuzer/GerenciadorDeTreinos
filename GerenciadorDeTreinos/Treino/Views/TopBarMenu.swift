@@ -15,7 +15,7 @@ struct TopBarMenu: View {
     var body: some View {
         HStack {
             Spacer()
-            Image(systemName: "plus")
+            Image(systemName: "plus.circle.fill")
                 .resizable()
                 .frame(width: buttonBarWidth, height: buttonBarHeight)
                 .font(.system(size: 25))

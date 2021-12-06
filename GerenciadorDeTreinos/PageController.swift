@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PageController: View {
     @EnvironmentObject var mainViewModel: MainViewModel
+    @EnvironmentObject var weekTrainingViewModel: WeekTrainingViewModel
     @State private var selection = 0
     
     init() {
@@ -39,6 +40,7 @@ struct MainView_Previews: PreviewProvider {
         PageController()
             .preferredColorScheme(.dark)
             .environmentObject(MainViewModel())
+            .environmentObject(WeekTrainingViewModel())
     }
 }
 

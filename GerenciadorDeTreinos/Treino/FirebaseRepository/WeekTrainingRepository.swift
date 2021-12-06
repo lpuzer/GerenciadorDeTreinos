@@ -39,6 +39,7 @@ class WeekTrainingRepository: ObservableObject {
     }
     
     
+    
     func addWeekTraining(_ weekTraining: WeekTraining) {
         do {
             var addedTraining = weekTraining

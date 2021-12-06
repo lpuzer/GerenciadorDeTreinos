@@ -5,6 +5,7 @@
 //  Created by Luciano Puzer on 28/11/21.
 //
 
+
 import SwiftUI
 import Combine
 import FirebaseAuth
@@ -54,33 +55,11 @@ struct AddIndividualTraining: View {
                                             Button(action: {
                                                 weekTrainingViewModel.daysOfWeek[index].isSelected = weekTrainingViewModel.daysOfWeek[index].isSelected ? false : true
                                                 
-                                                if weekTrainingViewModel.daysOfWeek[0].isSelected {
-                                                    self.weekTrainingViewModel.initialWeekTraining.sunday = true
-                                                    self.weekTrainingViewModel.initialWeekTraining.sundayDay = "Dom"
-                                                }
-                                                if weekTrainingViewModel.daysOfWeek[1].isSelected {
-                                                    self.weekTrainingViewModel.initialWeekTraining.monday = true
-                                                    self.weekTrainingViewModel.initialWeekTraining.mondayDay = "Seg"
-                                                }
-                                                if weekTrainingViewModel.daysOfWeek[2].isSelected {
-                                                    self.weekTrainingViewModel.initialWeekTraining.twesday = true
-                                                    self.weekTrainingViewModel.initialWeekTraining.twesdayDay = "Ter"
-                                                }
-                                                if weekTrainingViewModel.daysOfWeek[3].isSelected {
-                                                    self.weekTrainingViewModel.initialWeekTraining.wednesday = true
-                                                    self.weekTrainingViewModel.initialWeekTraining.wednesdayDay = "Qua"
-                                                }
-                                                if weekTrainingViewModel.daysOfWeek[4].isSelected {
-                                                    self.weekTrainingViewModel.initialWeekTraining.thursday = true
-                                                    self.weekTrainingViewModel.initialWeekTraining.thursdayDay = "Qui"
-                                                }
-                                                if weekTrainingViewModel.daysOfWeek[5].isSelected {
-                                                    self.weekTrainingViewModel.initialWeekTraining.friday = true
-                                                    self.weekTrainingViewModel.initialWeekTraining.fridayDay = "Sex"
-                                                }
-                                                if weekTrainingViewModel.daysOfWeek[6].isSelected {
-                                                    self.weekTrainingViewModel.initialWeekTraining.saturday = true
-                                                    self.weekTrainingViewModel.initialWeekTraining.sundayDay = "Sab"
+                                               
+                                                for i in 0..<7 {
+                                                    if (self.weekTrainingViewModel.daysOfWeek[i].isSelected == true) {
+                                                        self.weekTrainingViewModel.initialWeekTraining.selectedDay = self.weekTrainingViewModel.selectedDay[i]
+                                                    }
                                                 }
                                             }) {
                                                 VStack (alignment: .center, spacing: 2){
@@ -109,39 +88,22 @@ struct AddIndividualTraining: View {
                             Spacer()
                             Button(action: {
                                 if weekTrainingViewModel.initialWeekTraining.trainingName != "" {
-                                    let cardsDay = WeekTraining(id: "",
-                                                                userId: Auth.auth().currentUser?.uid,
-                                                                trainingName: self.weekTrainingViewModel.initialWeekTraining.trainingName,
-                                                                trainingId: self.mainViewModel.initialMainTraining.id,
-                                                                sunday: self.weekTrainingViewModel.initialWeekTraining.sunday,
-                                                                monday: self.weekTrainingViewModel.initialWeekTraining.monday,
-                                                                twesday: self.weekTrainingViewModel.initialWeekTraining.twesday,
-                                                                wednesday: self.weekTrainingViewModel.initialWeekTraining.wednesday,
-                                                                thursday: self.weekTrainingViewModel.initialWeekTraining.thursday,
-                                                                friday: self.weekTrainingViewModel.initialWeekTraining.friday,
-                                                                saturday: self.weekTrainingViewModel.initialWeekTraining.saturday,
-                                                                sundayDay: self.weekTrainingViewModel.initialWeekTraining.sundayDay,
-                                                                mondayDay: self.weekTrainingViewModel.initialWeekTraining.mondayDay,
-                                                                twesdayDay: self.weekTrainingViewModel.initialWeekTraining.twesdayDay,
-                                                                wednesdayDay: self.weekTrainingViewModel.initialWeekTraining.wednesdayDay,
-                                                                thursdayDay: self.weekTrainingViewModel.initialWeekTraining.thursdayDay,
-                                                                fridayDay: self.weekTrainingViewModel.initialWeekTraining.fridayDay,
-                                                                saturdayDay: self.weekTrainingViewModel.initialWeekTraining.saturdayDay)
-                                    self.weekTrainingViewModel.addDayTraining(cardsDay)
-                                   
+                                    for i in 0..<7 {
+                                        if (self.weekTrainingViewModel.daysOfWeek[i].isSelected == true) {
+                                            let card = WeekTraining(
+                                                userId: weekTrainingViewModel.initialWeekTraining.userId,
+                                                trainingName: weekTrainingViewModel.initialWeekTraining.trainingName,
+                                                trainingId: mainViewModel.initialMainTraining.id,
+                                                selectedDay: weekTrainingViewModel.selectedDay[i],
+                                                isSelectedDay: true)
+                                            weekTrainingViewModel.addDayTraining(card)
+                                        }
+                                    }
                                 }
                                 self.weekTrainingViewModel.initialWeekTraining.trainingName = ""
                                     for i in 0..<7 {
                                         self.weekTrainingViewModel.daysOfWeek[i].isSelected = false
                                     }
-                           
-                                self.weekTrainingViewModel.initialWeekTraining.sundayDay = ""
-                                self.weekTrainingViewModel.initialWeekTraining.mondayDay = ""
-                                self.weekTrainingViewModel.initialWeekTraining.twesdayDay = ""
-                                self.weekTrainingViewModel.initialWeekTraining.wednesdayDay = ""
-                                self.weekTrainingViewModel.initialWeekTraining.thursdayDay = ""
-                                self.weekTrainingViewModel.initialWeekTraining.fridayDay = ""
-                                self.weekTrainingViewModel.initialWeekTraining.saturdayDay = ""
                                 presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Salvar")

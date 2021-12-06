@@ -27,21 +27,13 @@ struct MainView: View {
                     Button(action:  {
                         showSheetMainForm.toggle()
                     } ) {
-                        TopBarMenu(buttonBarWidth: 30.0, buttonBarHeight: 30.0, buttonBarColor: .blue)
+                        TopBarMenu(buttonBarWidth: 30.0, buttonBarHeight: 30.0, buttonBarColor: .black)
                     }.sheet(isPresented: $showSheetMainForm) {
                         AddMainTraining()
                     }
                     
                     ScrollView(.horizontal, showsIndicators: true){
-                        NavigationLink(destination: TrainingListView()) {
-                            
-                            
-                            
                                 TrainingCellView()
-                            
-                            
-                            
-                        }
                     }
                     
                     Spacer()
