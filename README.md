@@ -1,5 +1,6 @@
 # Gerenciador de Treinos
 ---------------------
 
-https://user-images.githubusercontent.com/73191498/144775748-bdaef408-88ab-4da5-bf08-82d3c8b9b5d2.mp4
+![GitHub readme](https://user-images.githubusercontent.com/73191498/146763391-cc53d3f0-07e4-4c13-bff0-d4147f321092.mp4)
+
 
