@@ -80,7 +80,7 @@ extension SigInWithAppleCoordinator: ASAuthorizationControllerDelegate {
                 if let updatedCredential = (error as NSError).userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? OAuthCredential {
                     print("Signin using updated credentials")
                     Auth.auth().signIn(with: updatedCredential) { (authResult, error) in
-                        if let user = authResult?.user {
+                        if (authResult?.user) != nil {
                             if let callback = self.onSignIn {
                                 callback()
                             }

@@ -26,7 +26,7 @@ final class MainViewModel: ObservableObject {
     
     init() {
         self.initialMainTraining = MainModel(id: "", name: "", description: "", suggestedTraining: false, userId: "")
-        
+        self.mainModel = [MainModel(name: "", description: "", suggestedTraining: false)]
         
         trainingRepository.$mainModel
             .assign(to: \.mainModel, on: self)

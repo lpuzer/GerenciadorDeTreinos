@@ -74,7 +74,7 @@ struct GoogleLogin: View {
                     return
                 }
                 
-                guard let user = result?.user else{
+                guard (result?.user) != nil else{
                     return
                 }
             }

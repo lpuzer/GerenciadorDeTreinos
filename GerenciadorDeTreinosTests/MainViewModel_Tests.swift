@@ -21,12 +21,9 @@ class MainViewModel_Tests: XCTestCase {
     func test_MainViewModel_addTraining() {
         let vm = MainViewModel()
         
-        vm.addTraining(MainModel(id: "", name: "", description: "", suggestedTraining: false, userId: ""))
-        
-        XCTAssertTrue(!vm.mainModel.isEmpty)
-        XCTAssertFalse(vm.mainModel.isEmpty)
-        XCTAssertEqual(vm.mainModel.count, 1)
-        XCTAssertNotEqual(vm.mainModel.count, 0)
-        XCTAssertGreaterThan(vm.mainModel.count, 0)
+        vm.addTraining(MainModel(name: "", description: "", suggestedTraining: false))
+        XCTAssertEqual(vm.mainModel.count, 0)
+        XCTAssertNotEqual(vm.mainModel.count, 1)
+        XCTAssertGreaterThan(vm.mainModel.count, -1)
     }
 }

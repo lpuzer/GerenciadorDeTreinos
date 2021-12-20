@@ -25,11 +25,10 @@ struct TrainingCellView: View {
             ForEach (mainViewModel.mainModel) { task in
                 VStack {
                     ZStack(alignment: .leading) {
-                        Image(task.suggestedTraining ? "imageTreinoJoelho": "imageTreinoBackground")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                        Rectangle()
+                            .frame(width: 340, height: 200)
                             .cornerRadius(20)
-                            .frame(width: 320, height: 200)
+                            .foregroundColor(task.suggestedTraining ? Color.indigo : Color.orange)
                             .onTapGesture {
                                 self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
                                 self.mainViewModel.initialMainTraining.id = task.id
@@ -41,18 +40,29 @@ struct TrainingCellView: View {
                             .font(.title2)
                             .foregroundColor(Color.white)
                             .fontWeight(.bold)
-                            .offset(x: 0, y: 20)
+                            .offset(x: 0, y: 0)
+                            .padding()
+                        
+                        Text(task.description)
+                            .font(.caption)
+                            .foregroundColor(Color.white)
+                            .fontWeight(.bold)
+                            .offset(x: 0, y: 30)
                             .padding()
                         VStack {
                             Spacer()
                             Image(systemName: "multiply.circle")
-                                .foregroundColor(Color.gray)
-                                .padding(20)
-                                .offset(x: 260, y: -20)
+                                .resizable()
+                                .frame(width: 20, height: 20)
                                 .onTapGesture {
                                     self.selectedTraining = task
                                     self.showDeleteSheet.toggle()
                                 }
+                                .foregroundColor(Color.gray)
+                                .padding(50)
+                                .offset(x: 260, y: -20)
+                                
+                            
                                 .actionSheet(isPresented: $showDeleteSheet) {
                                     ActionSheet(title: Text("Excluir Treino Definitivamente"), message: nil, buttons: [
                                         .destructive(Text("Excluir"),
@@ -70,11 +80,10 @@ struct TrainingCellView: View {
                                     ])
                                 }
                             Spacer()
-
+                           
                             Image(systemName: "gearshape")
-                                .foregroundColor(Color.gray)
-                                .padding(30)
-                                .offset(x: -20, y: -120)
+                                .resizable()
+                                .frame(width: 20, height: 20)
                                 .onTapGesture {
                                     self.mainViewModel.initialMainTraining.userId = Auth.auth().currentUser!.uid
                                     self.mainViewModel.initialMainTraining.id = task.id
@@ -83,13 +92,18 @@ struct TrainingCellView: View {
                                     self.mainViewModel.initialMainTraining.description = task.description
                                     self.mainViewModel.initialMainTraining.userId = task.userId
                                     self.showEditSheet.toggle()
-                                }
+                                 }
+                                .foregroundColor(Color.gray)
+                                .padding(50)
+                                .offset(x: -40, y: -150)
                                 .actionSheet(isPresented: $showEditSheet, content: actionSheet)
                                 .sheet(isPresented: $showEditTraining, onDismiss: {
+
                                     
                                 }) {
                                     AddMainTraining()
                                 }
+                        
                         }
                     }.frame(width: 300, height: 200)
                 }.frame(width: 350, height: 200)

@@ -24,8 +24,8 @@
 		CB54A8442752D2820019B050 /* AddMainTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB54A8432752D2820019B050 /* AddMainTraining.swift */; };
 		CB54A8462752FC7F0019B050 /* TopBarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB54A8452752FC7F0019B050 /* TopBarMenu.swift */; };
 		CB55B4C1275698740068F01F /* WeekTrainingViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55B4C0275698740068F01F /* WeekTrainingViewModel_Tests.swift */; };
-		CB5BE74C275DAB2D00C7E9EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB5BE74B275DAB2D00C7E9EF /* GoogleService-Info.plist */; };
 		CB68FFD02753B5B60030DA57 /* MainViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB68FFCF2753B5B60030DA57 /* MainViewModel_Tests.swift */; };
+		CB84A339275E2880005BD876 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB84A338275E2880005BD876 /* GoogleService-Info.plist */; };
 		CB87781027559439009BDEA6 /* WeekTraininq.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB87780F27559439009BDEA6 /* WeekTraininq.swift */; };
 		CBD4399B27542D79006FA1B3 /* AddIndividualTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD4399A27542D79006FA1B3 /* AddIndividualTraining.swift */; };
 		CBEA2E05275AC0B200EE0BC1 /* WeekTrainingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEA2E04275AC0B200EE0BC1 /* WeekTrainingRepository.swift */; };
@@ -82,8 +82,8 @@
 		CB54A8432752D2820019B050 /* AddMainTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMainTraining.swift; sourceTree = "<group>"; };
 		CB54A8452752FC7F0019B050 /* TopBarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarMenu.swift; sourceTree = "<group>"; };
 		CB55B4C0275698740068F01F /* WeekTrainingViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTrainingViewModel_Tests.swift; sourceTree = "<group>"; };
-		CB5BE74B275DAB2D00C7E9EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CB68FFCF2753B5B60030DA57 /* MainViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel_Tests.swift; sourceTree = "<group>"; };
+		CB84A338275E2880005BD876 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CB87780F27559439009BDEA6 /* WeekTraininq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTraininq.swift; sourceTree = "<group>"; };
 		CBD4399A27542D79006FA1B3 /* AddIndividualTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIndividualTraining.swift; sourceTree = "<group>"; };
 		CBEA2E04275AC0B200EE0BC1 /* WeekTrainingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTrainingRepository.swift; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 				CB49634827500DB600A39EAC /* Exercicio */,
 				CBED6A6A274EA06B00B2908B /* Treino */,
 				CBED6A33274E9B8E00B2908B /* Assets.xcassets */,
-				CB5BE74B275DAB2D00C7E9EF /* GoogleService-Info.plist */,
+				CB84A338275E2880005BD876 /* GoogleService-Info.plist */,
 				CBED6A35274E9B8E00B2908B /* Preview Content */,
 			);
 			path = GerenciadorDeTreinos;
@@ -429,7 +429,7 @@
 			files = (
 				CBED6A37274E9B8E00B2908B /* Preview Assets.xcassets in Resources */,
 				CBED6A34274E9B8E00B2908B /* Assets.xcassets in Resources */,
-				CB5BE74C275DAB2D00C7E9EF /* GoogleService-Info.plist in Resources */,
+				CB84A339275E2880005BD876 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
